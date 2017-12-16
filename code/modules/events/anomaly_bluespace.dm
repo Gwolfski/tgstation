@@ -1,6 +1,7 @@
 /datum/round_event_control/anomaly/anomaly_bluespace
 	name = "Anomaly: Bluespace"
 	typepath = /datum/round_event/anomaly/anomaly_bluespace
+	min_players = 5
 	max_occurrences = 1
 	weight = 5
 

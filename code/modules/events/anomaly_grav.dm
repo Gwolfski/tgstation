@@ -1,6 +1,7 @@
 /datum/round_event_control/anomaly/anomaly_grav
 	name = "Anomaly: Gravitational"
 	typepath = /datum/round_event/anomaly/anomaly_grav
+	min_players = 5
 	max_occurrences = 5
 	weight = 20
 

@@ -10,7 +10,7 @@
 SERVERNAME OBA-station
 
 ## Server SQL name: This is the name used to identify the server to the SQL DB, distinct from SERVERNAME as it must be at most 32 characters.
-# SERVERSQLNAME tgstation
+SERVERSQLNAME tgstation
 
 ## Station name: The name of the station as it is referred to in-game. If commented out, the game will generate a random name instead.
 STATIONNAME OBA Station 13
@@ -28,7 +28,7 @@ ROUND_END_COUNTDOWN 90
 ADMIN_LEGACY_SYSTEM
 
 ## Comment this out if you want to use the SQL based banning system. The legacy systems use the files in the data folder. You need to set up your database to use the SQL based system.
-BAN_LEGACY_SYSTEM
+#BAN_LEGACY_SYSTEM
 
 ## Uncomment this entry to have certain jobs require your account to be at least a certain number of days old to select. You can configure the exact age requirement for different jobs by editing
 ## the minimal_player_age variable in the files in folder /code/game/jobs/job/.. for the job you want to edit. Set minimal_player_age to 0 to disable age requirement for that job.
@@ -41,7 +41,7 @@ BAN_LEGACY_SYSTEM
 USE_ACCOUNT_AGE_FOR_JOBS
 
 ## Unhash this to track player playtime in the database. Requires database to be enabled.
-#USE_EXP_TRACKING
+USE_EXP_TRACKING
 ## Unhash this to enable playtime requirements for head jobs.
 #USE_EXP_RESTRICTIONS_HEADS
 ## Unhash this to override head jobs' playtime requirements with this number of hours.
@@ -51,7 +51,7 @@ USE_ACCOUNT_AGE_FOR_JOBS
 ## Unhash this to enable playtime requirements for certain non-head jobs, like Engineer and Scientist.
 #USE_EXP_RESTRICTIONS_OTHER
 ## Allows admins to bypass job playtime requirements.
-#USE_EXP_RESTRICTIONS_ADMIN_BYPASS
+USE_EXP_RESTRICTIONS_ADMIN_BYPASS
 
 
 ## log OOC channel
@@ -196,12 +196,12 @@ CHECK_RANDOMIZER
 # RULESURL http://www.tgstation13.org/wiki/Rules
 
 ## Github address
-# GITHUBURL https://www.github.com/tgstation/-tg-station
+# GITHUBURL https://github.com/Gwolfski/tgstation
 
 ## Github repo id
 ##This can be found by going to https://api.github.com/users/<user name here>/repos
 ##Or https://api.github.com/orgs/<org name here>/repos if the repo owner is an organization 
-# GITHUBREPOID 3234987
+# GITHUBREPOID 114277941
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 # BANAPPEALS http://justanotherday.example.com
@@ -257,34 +257,33 @@ NOTE_STALE_DAYS 365.2422
 ##Note: all population caps can be used with each other if desired.
 
 ## Uncomment for 'soft' population caps, players will be warned while joining if the living crew exceeds the listed number.
-#SOFT_POPCAP 100
+SOFT_POPCAP 20
 
 ## Message for soft cap
 SOFT_POPCAP_MESSAGE Be warned that the server is currently serving a high number of users, consider using alternative game servers.
 
 ## Uncomment for 'hard' population caps, players will not be allowed to spawn if the living crew exceeds the listed number, though they may still observe or wait for the living crew to decrease in size.
-#HARD_POPCAP 150
+HARD_POPCAP 30
 
 ## Message for hard cap
 HARD_POPCAP_MESSAGE The server is currently serving a high number of users, You cannot currently join. You may wait for the number of living crew to decline, observe, or find alternative servers.
 
 ## Uncomment for 'extreme' population caps, players will not be allowed to join the server if living crew exceeds the listed number.
-#EXTREME_POPCAP 200
-
+EXTREME_POPCAP 50
 ## Message for extreme cap
 EXTREME_POPCAP_MESSAGE The server is currently serving a high number of users, find alternative servers.
 
 ## Notify admins when a new player connects for the first x days a player's been around. (0 for first connection only, -1 for never)
 ##	Requres database
-NOTIFY_NEW_PLAYER_AGE 0
+NOTIFY_NEW_PLAYER_AGE 2
 
 ## Notify admins when a player connects if their byond account was created in the last X days
 ## Requires database
-NOTIFY_NEW_PLAYER_ACCOUNT_AGE 1
+NOTIFY_NEW_PLAYER_ACCOUNT_AGE 7
 
 ## Notify the irc channel when a new player makes their first connection
 ##	Requres database
-#IRC_FIRST_CONNECTION_ALERT
+IRC_FIRST_CONNECTION_ALERT
 
 ## Deny all new connections by ckeys we haven't seen before (exempts admins and only denies the connection if the database is enabled and connected)
 ##	Requires database
@@ -333,7 +332,7 @@ AUTOADMIN_RANK Game Master
 
 ## GENERATE_MINIMAPS
 ## Generating minimaps(For crew monitor) is slow and bogs down testing, so its disabled by default and must be enabled by uncommenting this config if you are running a production server.
-#GENERATE_MINIMAPS
+GENERATE_MINIMAPS
 
 ## CLIENT VERSION CONTROL
 ## This allows you to configure the minimum required client version, as well as a warning version, and message for both.

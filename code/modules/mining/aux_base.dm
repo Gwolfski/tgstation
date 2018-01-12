@@ -38,7 +38,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 
 	var/list/options = params2list(possible_destinations)
 	var/obj/docking_port/mobile/M = SSshuttle.getShuttle(shuttleId)
-	var/dat = "[(z in GLOB.station_z_levels) ? "Docking clamps engaged. Standing by." : "Mining Shuttle Uplink: [M ? M.getStatusText() : "*OFFLINE*"]"]<br>"
+	var/dat = "[is_station_level(z) ? "Docking clamps engaged. Standing by." : "Mining Shuttle Uplink: [M ? M.getStatusText() : "*OFFLINE*"]"]<br>"
 	if(M)
 		var/destination_found
 		for(var/obj/docking_port/stationary/S in SSshuttle.stationary)
@@ -48,7 +48,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 				continue
 			destination_found = 1
 			dat += "<A href='?src=[REF(src)];move=[S.id]'>Send to [S.name]</A><br>"
-		if(!destination_found && (z in GLOB.station_z_levels)) //Only available if miners are lazy and did not set an LZ using the remote.
+		if(!destination_found && is_station_level(z)) //Only available if miners are lazy and did not set an LZ using the remote.
 			dat += "<A href='?src=[REF(src)];random=1'>Prepare for blind drop? (Dangerous)</A><br>"
 	if(LAZYLEN(turrets))
 		dat += "<br><b>Perimeter Defense System:</b> <A href='?src=[REF(src)];turrets_power=on'>Enable All</A> / <A href='?src=[REF(src)];turrets_power=off'>Disable All</A><br> \
@@ -87,7 +87,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 		return
 
 	if(href_list["move"])
-		if(!(z in GLOB.station_z_levels) && shuttleId == "colony_drop")
+		if(!is_station_level(z) && shuttleId == "colony_drop")
 			to_chat(usr, "<span class='warning'>You can't move the base again!</span>")
 			return
 		var/shuttle_error = SSshuttle.moveShuttle(shuttleId, href_list["move"], 1)
@@ -102,7 +102,10 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 
 	if(href_list["random"] && !possible_destinations)
 		usr.changeNext_move(CLICK_CD_RAPID) //Anti-spam
-		var/turf/LZ = safepick(Z_TURFS(ZLEVEL_MINING)) //Pick a random mining Z-level turf
+		var/list/all_mining_turfs = list()
+		for (var/z_level in SSmapping.levels_by_trait(ZTRAIT_MINING))
+			all_mining_turfs += Z_TURFS(z_level)
+		var/turf/LZ = safepick(all_mining_turfs) //Pick a random mining Z-level turf
 		if(!ismineralturf(LZ) && !istype(LZ, /turf/open/floor/plating/asteroid))
 		//Find a suitable mining turf. Reduces chance of landing in a bad area
 			to_chat(usr, "<span class='warning'>Landing zone scan failed. Please try again.</span>")
@@ -129,7 +132,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 	updateUsrDialog()
 
 /obj/machinery/computer/auxillary_base/proc/set_mining_mode()
-	if(z == ZLEVEL_MINING) //The console switches to controlling the mining shuttle once landed.
+	if(is_mining_level(z)) //The console switches to controlling the mining shuttle once landed.
 		req_one_access = list()
 		shuttleId = "mining" //The base can only be dropped once, so this gives the console a new purpose.
 		possible_destinations = "mining_home;mining_away;landing_zone_dock;mining_public"
@@ -146,7 +149,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 			/turf/open/indestructible,
 			))
 
-		if(T.z != ZLEVEL_MINING)
+		if(!is_mining_level(T.z))
 			return BAD_ZLEVEL
 
 		var/colony_radius = CEILING(max(base_dock.width, base_dock.height)*0.5, 1)
@@ -211,7 +214,7 @@ interface with the mining shuttle at the landing site if a mobile beacon is also
 	var/obj/machinery/computer/auxillary_base/AB
 
 	for (var/obj/machinery/computer/auxillary_base/A in GLOB.machines)
-		if(A.z in GLOB.station_z_levels)
+		if(is_station_level(A.z))
 			AB = A
 			break
 	if(!AB)
@@ -280,7 +283,7 @@ obj/docking_port/stationary/public_mining_dock
 
 	var/turf/landing_spot = get_turf(src)
 
-	if(landing_spot.z != ZLEVEL_MINING)
+	if(!is_mining_level(landing_spot.z))
 		to_chat(user, "<span class='warning'>This device is only to be used in a mining zone.</span>")
 		return
 	var/obj/machinery/computer/auxillary_base/aux_base_console

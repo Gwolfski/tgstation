@@ -30,6 +30,7 @@
 	var/obj/item/inventory_back
 	var/nofur = 0 		//Corgis that have risen past the material plane of existence.
 	gold_core_spawnable = FRIENDLY_SPAWN
+	can_be_held = TRUE
 
 /mob/living/simple_animal/pet/dog/pug
 	name = "\improper pug"
@@ -119,7 +120,12 @@
 	..()
 	update_corgi_fluff()
 
-
+/mob/living/simple_animal/pet/dog/corgi/mob_pickup(mob/living/L)
+	var/obj/item/clothing/head/mob_holder/holder = new(get_turf(src), src, "corgi", null, 'icons/mob/pets_held_lh.dmi', 'icons/mob/pets_held_rh.dmi', FALSE)
+	if(!L.put_in_hands(holder))
+		qdel(holder)
+	else
+		L.visible_message("<span class='warning'>[L] scoops up [src]!</span>")
 
 /mob/living/simple_animal/pet/dog/corgi/Topic(href, href_list)
 	if(usr.stat)
@@ -289,6 +295,7 @@
 	response_disarm = "bops"
 	response_harm   = "kicks"
 	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 	var/age = 0
 	var/record_age = 1
 	var/memory_saved = FALSE
@@ -438,6 +445,7 @@
 	faction = list("dog", "cult")
 	gold_core_spawnable = NO_SPAWN
 	nofur = TRUE
+	unique_pet = TRUE
 
 /mob/living/simple_animal/pet/dog/corgi/narsie/Life()
 	..()
@@ -550,6 +558,8 @@
 	real_name = "Lisa"
 	gender = FEMALE
 	desc = "It's a corgi with a cute pink bow."
+	gold_core_spawnable = NO_SPAWN
+	unique_pet = TRUE
 	icon_state = "lisa"
 	icon_living = "lisa"
 	icon_dead = "lisa_dead"
@@ -558,7 +568,6 @@
 	response_harm   = "kicks"
 	var/turns_since_scan = 0
 	var/puppies = 0
-	gold_core_spawnable = NO_SPAWN
 
 //Lisa already has a cute bow!
 /mob/living/simple_animal/pet/dog/corgi/Lisa/Topic(href, href_list)

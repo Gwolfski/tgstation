@@ -1282,6 +1282,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_name = "eggnog"
 	glass_desc = "For enjoying the most wonderful time of the year."
 
+
 	/datum/reagent/consumable/ethanol/moony_curse //Ok. Thats it. The system may or may not pack up and leave.
 	name = "Moony's curse"
 	id = "moony_curse"
@@ -1323,3 +1324,21 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			if(prob(50))
 				M.confused = max(M.confused+3,0)
 	..()
+=======
+
+/datum/reagent/consumable/ethanol/narsour
+	name = "Nar'Sour"
+	id = "narsour"
+	description = "Side effects include self-mutilation and hoarding plasteel."
+	color = RUNE_COLOR_DARKRED
+	boozepwr = 10
+	taste_description = "bloody"
+	glass_icon_state = "narsour"
+	glass_name = "Nar'Sour"
+	glass_desc = "A new hit cocktail inspired by THE ARM Breweries will have you shouting Fuu ma'jin in no time!"
+
+/datum/reagent/consumable/ethanol/narsour/on_mob_life(mob/living/M)
+	M.cultslurring = min(M.cultslurring + 3, 3)
+	M.stuttering = min(M.stuttering + 3, 3)
+	..()
+

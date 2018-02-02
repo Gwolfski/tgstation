@@ -1199,6 +1199,9 @@ B --><-- A
 	sleep(duration)
 	A.cut_overlay(O)
 
+/proc/get_random_station_turf()
+	return safepick(get_area_turfs(pick(GLOB.the_station_areas)))
+
 /proc/get_closest_atom(type, list, source)
 	var/closest_atom
 	var/closest_distance
@@ -1517,7 +1520,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 			. += V
 
 //datum may be null, but it does need to be a typed var
-#define NAMEOF(datum, X) (list(##datum.##X, #X)[2])
+#define NAMEOF(datum, X) (#X || ##datum.##X)
 
 #define VARSET_LIST_CALLBACK(target, var_name, var_value) CALLBACK(GLOBAL_PROC, /proc/___callbackvarset, ##target, ##var_name, ##var_value)
 //dupe code because dm can't handle 3 level deep macros

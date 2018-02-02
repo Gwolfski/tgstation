@@ -205,7 +205,11 @@ CHECK_RANDOMIZER
 # RULESURL http://www.tgstation13.org/wiki/Rules
 
 ## Github address
+<<<<<<< HEAD
 # GITHUBURL https://github.com/Gwolfski/tgstation
+=======
+# GITHUBURL https://www.github.com/tgstation/tgstation
+>>>>>>> 92181c72f1325ad0d8b4ef7b15ecb2ce6145a337
 
 ## Github repo id
 ##This can be found by going to https://api.github.com/users/<user name here>/repos

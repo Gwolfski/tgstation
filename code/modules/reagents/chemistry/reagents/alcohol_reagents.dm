@@ -1324,7 +1324,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			if(prob(50))
 				M.confused = max(M.confused+3,0)
 	..()
-=======
 
 /datum/reagent/consumable/ethanol/narsour
 	name = "Nar'Sour"

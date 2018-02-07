@@ -1908,7 +1908,7 @@
 "aKJ" = (/obj/machinery/atmospherics/pipe/simple/supplymain/hidden,/turf/open/floor/plating,/area/maintenance/central)
 "aKK" = (/turf/closed/wall,/area/maintenance/central)
 "aKL" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/closed/wall,/area/maintenance/central)
-"aKM" = (/turf/open/floor/circuit/telecomms/mainframe,/area/comms)
+"aKM" = (/obj/machinery/telecomms/message_server,/turf/open/floor/circuit/telecomms/mainframe,/area/comms)
 "aKN" = (/obj/machinery/telecomms/broadcaster/preset_left,/turf/open/floor/circuit/telecomms/mainframe,/area/comms)
 "aKO" = (/obj/machinery/telecomms/receiver/preset_left,/turf/open/floor/circuit/telecomms/mainframe,/area/comms)
 "aKP" = (/obj/machinery/telecomms/hub/preset,/turf/open/floor/circuit/telecomms/mainframe,/area/comms)

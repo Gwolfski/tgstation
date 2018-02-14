@@ -1195,7 +1195,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 	pixel_y = 23
 	},
 /obj/machinery/computer/shuttle/mining{
-	req_access = "0"
+	req_access = null
 	},
 /turf/open/floor/plasteel/purple/side{
 	dir = 1
@@ -1913,8 +1913,8 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/mine/maintenance)
 "dB" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/reagent_containers/blood/empty,
-/obj/item/reagent_containers/blood/empty{
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -2014,8 +2014,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/mine/production)
 "dL" = (
 /obj/structure/closet/crate{
-	icon_state = "crateopen";
-	opened = 1
+	icon_state = "crateopen"
 	},
 /obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel,
@@ -2469,15 +2468,13 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 	pixel_y = -22
 	},
 /obj/structure/closet/crate{
-	icon_state = "crateopen";
-	opened = 1
+	icon_state = "crateopen"
 	},
 /turf/open/floor/plasteel/purple/side,
 /area/mine/production)
 "eT" = (
 /obj/structure/closet/crate{
-	icon_state = "crateopen";
-	opened = 1
+	icon_state = "crateopen"
 	},
 /obj/machinery/light,
 /turf/open/floor/plasteel/brown,
@@ -2488,8 +2485,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/mine/production)
 "eV" = (
 /obj/structure/closet/crate{
-	icon_state = "crateopen";
-	opened = 1
+	icon_state = "crateopen"
 	},
 /turf/open/floor/plasteel/brown{
 	dir = 6

@@ -30,7 +30,7 @@
 		if((flags & CALTROP_IGNORE_WALKERS) && H.m_intent == MOVE_INTENT_WALK)
 			return
 
-		var/picked_def_zone = pick("l_leg", "r_leg")
+		var/picked_def_zone = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 		var/obj/item/bodypart/O = H.get_bodypart(picked_def_zone)
 		if(!istype(O))
 			return
@@ -46,6 +46,8 @@
 			return
 
 		var/damage = rand(min_damage, max_damage)
+		if(H.has_trait(TRAIT_LIGHT_STEP))
+			damage *= 0.75
 		H.apply_damage(damage, BRUTE, picked_def_zone)
 
 		if(cooldown < world.time - 10) //cooldown to avoid message spam.

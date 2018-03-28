@@ -31,7 +31,7 @@
 
 	integrity_failure = 50
 	max_integrity = 100
-	armor = list(melee = 0, bullet = 20, laser = 20, energy = 100, bomb = 0, bio = 100, rad = 100, fire = 0, acid = 0)
+	armor = list("melee" = 0, "bullet" = 20, "laser" = 20, "energy" = 100, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 0, "acid" = 0)
 
 	// Important hardware (must be installed for computer to work)
 
@@ -161,12 +161,15 @@
 	var/mob/M = usr
 	if((!istype(over_object, /obj/screen)) && usr.canUseTopic(src))
 		return attack_self(M)
-	return
+	return ..()
 
 /obj/item/device/modular_computer/attack_ai(mob/user)
 	return attack_self(user)
 
 /obj/item/device/modular_computer/attack_ghost(mob/dead/observer/user)
+	. = ..()
+	if(.)
+		return
 	if(enabled)
 		ui_interact(user)
 	else if(IsAdminGhost(user))
@@ -207,7 +210,7 @@
 
 
 // On-click handling. Turns on the computer if it's off and opens the GUI.
-/obj/item/device/modular_computer/attack_self(mob/user)
+/obj/item/device/modular_computer/interact(mob/user)
 	if(enabled)
 		ui_interact(user)
 	else
@@ -330,7 +333,7 @@
 
 		data["PC_programheaders"] = program_headers
 
-	data["PC_stationtime"] = worldtime2text()
+	data["PC_stationtime"] = station_time_timestamp()
 	data["PC_hasheader"] = 1
 	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
 	return data

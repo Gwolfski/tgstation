@@ -9,7 +9,7 @@
 	var/base_state = "left"
 	max_integrity = 150 //If you change this, consider changing ../door/window/brigdoor/ max_integrity at the bottom of this .dm file
 	integrity_failure = 0
-	armor = list(melee = 20, bullet = 50, laser = 50, energy = 50, bomb = 10, bio = 100, rad = 100, fire = 70, acid = 100)
+	armor = list("melee" = 20, "bullet" = 50, "laser" = 50, "energy" = 50, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 70, "acid" = 100)
 	visible = FALSE
 	flags_1 = ON_BORDER_1
 	opacity = 0
@@ -18,7 +18,7 @@
 	var/reinf = 0
 	var/shards = 2
 	var/rods = 2
-	var/cable = 2
+	var/cable = 1
 	var/list/debris = list()
 
 /obj/machinery/door/window/Initialize(mapload, set_dir)
@@ -200,10 +200,6 @@
 	if(exposed_temperature > T0C + (reinf ? 1600 : 800))
 		take_damage(round(exposed_volume / 200), BURN, 0, 0)
 	..()
-
-
-/obj/machinery/door/window/attack_ai(mob/user)
-	return src.attack_hand(user)
 
 /obj/machinery/door/window/emag_act(mob/user)
 	if(!operating && density && !(obj_flags & EMAGGED))

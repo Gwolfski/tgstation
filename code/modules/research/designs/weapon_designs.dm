@@ -2,6 +2,42 @@
 /////////////////Weapons/////////////////
 /////////////////////////////////////////
 
+/datum/design/c38/sec
+	id = "sec_38"
+	build_type = PROTOLATHE
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
+/datum/design/rubbershot/sec
+	id = "sec_rshot"
+	build_type = PROTOLATHE
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
+/datum/design/shotgun_slug/sec
+	id = "sec_slug"
+	build_type = PROTOLATHE
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
+/datum/design/buckshot_shell/sec
+	id = "sec_bshot"
+	build_type = PROTOLATHE
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
+/datum/design/shotgun_dart/sec
+	id = "sec_dart"
+	build_type = PROTOLATHE
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
+/datum/design/incendiary_slug/sec
+	id = "sec_Islug"
+	build_type = PROTOLATHE
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
 /datum/design/pin_testing
 	name = "Test-Range Firing Pin"
 	desc = "This safety firing pin allows firearms to be operated within proximity to a firing range."
@@ -251,3 +287,13 @@
 	build_path = /obj/item/gun/energy/kinetic_accelerator/crossbow/large
 	category = list("Weapons")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
+
+/datum/design/cryostatis_shotgun_dart
+	name = "Cryostatis Shotgun Dart"
+	desc = "A shotgun dart designed with similar internals to that of a cryostatis beaker, allowing reagents to not react when inside."
+	id = "shotgundartcryostatis"
+	build_type = PROTOLATHE
+	materials = list(MAT_METAL = 3500)
+	build_path = /obj/item/ammo_casing/shotgun/dart/noreact
+	category = list("Ammo")
+	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL

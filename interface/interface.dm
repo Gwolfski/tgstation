@@ -84,8 +84,9 @@ Admin:
 \tF3 = asay
 \tF5 = Aghost (admin-ghost)
 \tF6 = player-panel
-\tF7 = admin-pm
+\tF7 = Buildmode
 \tF8 = Invisimin
+\tCtrl+F8 = Stealthmin
 </font>"}
 
 	mob.hotkey_help()
@@ -220,10 +221,3 @@ Any-Mode: (hotkey doesn't need to be on)
 
 	to_chat(src, hotkey_mode)
 	to_chat(src, other)
-
-// Needed to circumvent a bug where .winset does not work when used on the window.on-size event in skins.
-// Used by /datum/html_interface/nanotrasen (code/modules/html_interface/nanotrasen/nanotrasen.dm)
-/client/verb/_swinset(var/x as text)
-	set name = ".swinset"
-	set hidden = 1
-	winset(src, null, x)

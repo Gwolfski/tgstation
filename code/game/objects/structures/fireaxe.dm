@@ -6,7 +6,7 @@
 	icon_state = "fireaxe"
 	anchored = TRUE
 	density = FALSE
-	armor = list(melee = 50, bullet = 20, laser = 0, energy = 100, bomb = 10, bio = 100, rad = 100, fire = 90, acid = 50)
+	armor = list("melee" = 50, "bullet" = 20, "laser" = 0, "energy" = 100, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 50)
 	var/locked = TRUE
 	var/open = FALSE
 	max_integrity = 150
@@ -104,6 +104,9 @@
 	qdel(src)
 
 /obj/structure/fireaxecabinet/attack_hand(mob/user)
+	. = ..()
+	if(.)
+		return
 	if(open || broken)
 		if(fireaxe)
 			user.put_in_hands(fireaxe)
@@ -121,7 +124,7 @@
 		return
 
 /obj/structure/fireaxecabinet/attack_paw(mob/living/user)
-	attack_hand(user)
+	return attack_hand(user)
 
 /obj/structure/fireaxecabinet/attack_ai(mob/user)
 	toggle_lock(user)

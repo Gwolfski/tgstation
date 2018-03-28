@@ -10,12 +10,11 @@
 	var/device_type = null
 	var/id = null
 	var/initialized_button = 0
-	armor = list(melee = 50, bullet = 50, laser = 50, energy = 50, bomb = 10, bio = 100, rad = 100, fire = 90, acid = 70)
+	armor = list("melee" = 50, "bullet" = 50, "laser" = 50, "energy" = 50, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 70)
 	anchored = TRUE
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 2
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
-
 
 /obj/machinery/button/Initialize(mapload, ndir = 0, built = 0)
 	. = ..()
@@ -98,7 +97,7 @@
 		return
 
 	if(user.a_intent != INTENT_HARM && !(W.flags_1 & NOBLUDGEON_1))
-		return src.attack_hand(user)
+		return attack_hand(user)
 	else
 		return ..()
 
@@ -114,6 +113,9 @@
 	if(!panel_open)
 		return attack_hand(user)
 
+/obj/machinery/button/attack_robot(mob/user)
+	return attack_ai(user)
+
 /obj/machinery/button/proc/setup_device()
 	if(id && istype(device, /obj/item/device/assembly/control))
 		var/obj/item/device/assembly/control/A = device
@@ -121,9 +123,12 @@
 	initialized_button = 1
 
 /obj/machinery/button/attack_hand(mob/user)
+	. = ..()
+	if(.)
+		return
 	if(!initialized_button)
 		setup_device()
-	src.add_fingerprint(user)
+	add_fingerprint(user)
 	if(panel_open)
 		if(device || board)
 			if(device)
@@ -172,7 +177,7 @@
 /obj/machinery/button/door
 	name = "door button"
 	desc = "A door remote control switch."
-	var/normaldoorcontrol = 0
+	var/normaldoorcontrol = FALSE
 	var/specialfunctions = OPEN // Bitflag, see assembly file
 
 /obj/machinery/button/door/setup_device()

@@ -31,13 +31,15 @@
 	playsound(get_turf(src), 'sound/items/party_horn.ogg', 50, 1, -1)
 	qdel(src)
 
+//ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/effect/fun_balloon/attack_ghost(mob/user)
 	if(!user.client || !user.client.holder || popped)
 		return
-	switch(alert("Pop [src]?","Fun Balloon","Yes","No"))
-		if("Yes")
-			effect()
-			pop()
+	var/confirmation = alert("Pop [src]?","Fun Balloon","Yes","No")
+	if(confirmation == "Yes" && !popped)
+		popped = TRUE
+		effect()
+		pop()
 
 /obj/effect/fun_balloon/sentience
 	name = "sentience fun balloon"
@@ -53,7 +55,7 @@
 	var/question = "Would you like to be [group_name]?"
 	var/list/candidates = pollCandidatesForMobs(question, ROLE_PAI, null, FALSE, 100, bodies)
 	while(LAZYLEN(candidates) && LAZYLEN(bodies))
-		var/client/C = pick_n_take(candidates)
+		var/mob/dead/observer/C = pick_n_take(candidates)
 		var/mob/living/body = pick_n_take(bodies)
 
 		to_chat(body, "Your mob has been taken over by a ghost!")

@@ -80,6 +80,7 @@
 
 /obj/item/storage/fancy/egg_box
 	icon = 'icons/obj/food/containers.dmi'
+	item_state = "eggbox"
 	icon_state = "eggbox"
 	icon_type = "egg"
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
@@ -230,6 +231,12 @@
 	icon_state = "shadyjim"
 	spawn_type = /obj/item/clothing/mask/cigarette/shadyjims
 
+/obj/item/storage/fancy/cigarettes/cigpack_xeno
+	name = "\improper Xeno Filtered packet"
+	desc = "Loaded with 100% pure slime. And also nicotine."
+	icon_state = "slime"
+	spawn_type = /obj/item/clothing/mask/cigarette/xeno
+
 /obj/item/storage/fancy/rollingpapers
 	name = "rolling paper pack"
 	desc = "A pack of Nanotrasen brand rolling papers."
@@ -290,8 +297,9 @@
 	name = "heart-shaped box"
 	desc = "A heart-shaped box for holding tiny chocolates."
 	icon = 'icons/obj/food/containers.dmi'
-	icon_state = "heartbox"
-	icon_type = "heart"
+	item_state = "chocolatebox"
+	icon_state = "chocolatebox"
+	icon_type = "chocolate"
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
 	storage_slots = 8

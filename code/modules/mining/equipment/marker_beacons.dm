@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(marker_beacon_colors, list(
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "marker"
 	layer = BELOW_OPEN_DOOR_LAYER
-	armor = list(melee = 50, bullet = 75, laser = 75, energy = 75, bomb = 25, bio = 100, rad = 100, fire = 25, acid = 0)
+	armor = list("melee" = 50, "bullet" = 75, "laser" = 75, "energy" = 75, "bomb" = 25, "bio" = 100, "rad" = 100, "fire" = 25, "acid" = 0)
 	max_integrity = 50
 	anchored = TRUE
 	light_range = 2
@@ -103,6 +103,9 @@ GLOBAL_LIST_INIT(marker_beacon_colors, list(
 	set_light(light_range, light_power, GLOB.marker_beacon_colors[picked_color])
 
 /obj/structure/marker_beacon/attack_hand(mob/living/user)
+	. = ..()
+	if(.)
+		return
 	to_chat(user, "<span class='notice'>You start picking [src] up...</span>")
 	if(do_after(user, remove_speed, target = src))
 		var/obj/item/stack/marker_beacon/M = new(loc)

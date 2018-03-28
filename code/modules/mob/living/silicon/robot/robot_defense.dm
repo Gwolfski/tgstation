@@ -1,13 +1,11 @@
-
-
-/mob/living/silicon/robot/attacked_by(obj/item/I, mob/living/user, def_zone)
+/mob/living/silicon/robot/attackby(obj/item/I, mob/living/user)
 	if(hat_offset != INFINITY && user.a_intent == INTENT_HELP && is_type_in_typecache(I, equippable_hats))
 		to_chat(user, "<span class='notice'>You begin to place [I] on [src]'s head...</span>")
 		to_chat(src, "<span class='notice'>[user] is placing [I] on your head...</span>")
 		if(do_after(user, 30, target = src))
-			user.temporarilyRemoveItemFromInventory(I, TRUE)
-			place_on_head(I)
-			return
+			if (user.temporarilyRemoveItemFromInventory(I, TRUE))
+				place_on_head(I)
+		return
 	if(I.force && I.damtype != STAMINA && stat != DEAD) //only sparks if real damage is dealt.
 		spark_system.start()
 	return ..()
@@ -52,6 +50,7 @@
 
 	return
 
+//ATTACK HAND IGNORING PARENT RETURN VALUE
 /mob/living/silicon/robot/attack_hand(mob/living/carbon/human/user)
 	add_fingerprint(user)
 	if(opened && !wiresexposed && !issilicon(user))
@@ -111,11 +110,6 @@
 		to_chat(src, "<span class='nezbere'>\"[text2ratvar("You will serve Engine above all else")]!\"</span>\n\
 		<span class='danger'>ALERT: Subversion attempt denied.</span>")
 		log_game("[key_name(user)] attempted to emag cyborg [key_name(src)], but they serve only Ratvar.")
-		return
-
-	if(syndicate)
-		to_chat(src, "<span class='danger'>ALERT: Foreign software execution prevented.</span>")
-		log_game("[key_name(user)] attempted to emag cyborg [key_name(src)], but they were a syndicate cyborg.")
 		return
 
 	if(connected_ai && connected_ai.mind && connected_ai.mind.has_antag_datum(/datum/antagonist/traitor))

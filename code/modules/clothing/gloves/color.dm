@@ -154,7 +154,7 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
 	strip_delay = 60
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0, fire = 70, acid = 50)
+	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 70, "acid" = 50)
 
 /obj/item/clothing/gloves/color/latex
 	name = "latex gloves"
@@ -163,7 +163,7 @@
 	item_state = "lgloves"
 	siemens_coefficient = 0.3
 	permeability_coefficient = 0.01
-	item_color="white"
+	item_color="mime"
 	transfer_prints = TRUE
 	resistance_flags = NONE
 
@@ -180,7 +180,7 @@
 	desc = "These look pretty fancy."
 	icon_state = "white"
 	item_state = "wgloves"
-	item_color="mime"
+	item_color="white"
 
 /obj/item/clothing/gloves/color/white/redcoat
 	item_color = "redcoat"		//Exists for washing machines. Is not different from white gloves in any way.

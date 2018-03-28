@@ -49,6 +49,8 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	//Since any item can now be a piece of clothing, this has to be put here so all items share it.
 	var/flags_inv //This flag is used to determine when items in someone's inventory cover others. IE helmets making it so you can't see glasses, etc.
 
+	var/interaction_flags_item = INTERACT_ITEM_ATTACK_HAND_PICKUP
+
 	var/item_color = null //this needs deprecating, soonish
 
 	var/body_parts_covered = 0 //see setup.dm for appropriate bit flags
@@ -237,6 +239,9 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	return ..()
 
 /obj/item/attack_hand(mob/user)
+	. = ..()
+	if(.)
+		return
 	if(!user)
 		return
 	if(anchored)
@@ -244,18 +249,23 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 
 	if(resistance_flags & ON_FIRE)
 		var/mob/living/carbon/C = user
-		if(istype(C))
-			if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
-				extinguish()
-				to_chat(user, "<span class='notice'>You put out the fire on [src].</span>")
-			else
-				to_chat(user, "<span class='warning'>You burn your hand on [src]!</span>")
-				var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
-				if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
-					C.update_damage_overlays()
-				return
-		else
+		var/can_handle_hot = FALSE
+		if(!istype(C))
+			can_handle_hot = TRUE
+		else if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
+			can_handle_hot = TRUE
+		else if(C.has_trait(TRAIT_RESISTHEAT) || C.has_trait(TRAIT_RESISTHEATHANDS))
+			can_handle_hot = TRUE
+
+		if(can_handle_hot)
 			extinguish()
+			to_chat(user, "<span class='notice'>You put out the fire on [src].</span>")
+		else
+			to_chat(user, "<span class='warning'>You burn your hand on [src]!</span>")
+			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
+				C.update_damage_overlays()
+			return
 
 	if(acid_level > 20 && !ismob(loc))// so we can still remove the clothes on us that have acid.
 		var/mob/living/carbon/C = user
@@ -266,6 +276,8 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 				if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
 					C.update_damage_overlays()
 
+	if(!(interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))		//See if we're supposed to auto pickup.
+		return
 
 	if(istype(loc, /obj/item/storage))
 		//If the item is in a storage item, take it out
@@ -275,7 +287,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	if(throwing)
 		throwing.finalize(FALSE)
 	if(loc == user)
-		if(!user.dropItemToGround(src))
+		if(!allow_attack_hand_drop(user) || !user.dropItemToGround(src))
 			return
 
 	pickup(user)
@@ -407,9 +419,11 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
+	SendSignal(COMSIG_ITEM_PICKUP, user)
 	item_flags |= IN_INVENTORY
-	return
 
+/obj/item/proc/allow_attack_hand_drop(mob/user)
+	return TRUE
 
 // called when this item is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
 /obj/item/proc/on_exit_storage(obj/item/storage/S)
@@ -423,7 +437,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 /obj/item/proc/on_found(mob/finder)
 	return
 
-// called after an item is placed in an equipment slot //NOPE, for example, if you put a helmet in slot_head, it is NOT in user's head variable yet, how stupid.
+// called after an item is placed in an equipment slot
 // user is mob that equipped it
 // slot uses the slot_X defines found in setup.dm
 // for items that can be placed in multiple slots
@@ -476,7 +490,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 /obj/item/proc/eyestab(mob/living/carbon/M, mob/living/carbon/user)
 
 	var/is_human_victim = 0
-	var/obj/item/bodypart/affecting = M.get_bodypart("head")
+	var/obj/item/bodypart/affecting = M.get_bodypart(BODY_ZONE_HEAD)
 	if(ishuman(M))
 		if(!affecting) //no head!
 			return
@@ -524,6 +538,8 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 
 	else
 		M.take_bodypart_damage(7)
+
+	M.SendSignal(COMSIG_ADD_MOOD_EVENT, "eye_stab", /datum/mood_event/eye_stab)
 
 	add_logs(user, M, "attacked", "[src.name]", "(INTENT: [uppertext(user.a_intent)])")
 
@@ -668,6 +684,8 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	return 0
 
 /obj/item/attack_animal(mob/living/simple_animal/M)
+	if (obj_flags & CAN_BE_HIT)
+		return ..()
 	return 0
 
 /obj/item/mech_melee_attack(obj/mecha/M)
@@ -734,7 +752,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		openToolTip(user,src,params,title = name,content = "[desc]<br><b>Force:</b> [force_string]",theme = "")
 
 /obj/item/MouseEntered(location, control, params)
-	if((item_flags & IN_INVENTORY) && usr.client.prefs.enable_tips)
+	if((item_flags & IN_INVENTORY) && usr.client.prefs.enable_tips && !QDELETED(src))
 		var/timedelay = usr.client.prefs.tip_delay/100
 		var/user = usr
 		tip_timer = addtimer(CALLBACK(src, .proc/openTip, location, control, params, user), timedelay, TIMER_STOPPABLE)//timer takes delay in deciseconds, but the pref is in milliseconds. dividing by 100 converts it.
@@ -811,3 +829,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 // Used in a callback that is passed by use_tool into do_after call. Do not override, do not call manually.
 /obj/item/proc/tool_check_callback(mob/living/user, amount, datum/callback/extra_checks)
 	return tool_use_check(user, amount) && (!extra_checks || extra_checks.Invoke())
+
+// Returns a numeric value for sorting items used as parts in machines, so they can be replaced by the rped
+/obj/item/proc/get_part_rating()
+	return 0

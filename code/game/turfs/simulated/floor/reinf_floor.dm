@@ -25,6 +25,12 @@
 		..()
 	return //unplateable
 
+/turf/open/floor/engine/try_replace_tile(obj/item/stack/tile/T, mob/user, params)
+	return
+
+/turf/open/floor/engine/crowbar_act(mob/living/user, obj/item/I)
+	return
+
 /turf/open/floor/engine/wrench_act(mob/living/user, obj/item/I)
 	to_chat(user, "<span class='notice'>You begin removing rods...</span>")
 	if(I.use_tool(src, user, 30, volume=80))
@@ -69,11 +75,13 @@
 			ReplaceWithLattice()
 
 /turf/open/floor/engine/attack_paw(mob/user)
-	return src.attack_hand(user)
+	return attack_hand(user)
 
 /turf/open/floor/engine/attack_hand(mob/user)
+	. = ..()
+	if(.)
+		return
 	user.Move_Pulled(src)
-
 
 //air filled floors; used in atmos pressure chambers
 
@@ -108,6 +116,7 @@
 	desc = "The air hangs heavy over this sinister flooring."
 	icon_state = "plating"
 	CanAtmosPass = ATMOS_PASS_NO
+	floor_tile = null
 	var/obj/effect/clockwork/overlay/floor/bloodcult/realappearance
 
 

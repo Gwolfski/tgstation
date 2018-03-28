@@ -300,8 +300,8 @@ GLOBAL_LIST_INIT(devil_suffix, list(" the Red", " the Soulless", " the Master", 
 	sleep(1)
 	if(!D)
 		return
-	to_chat(world, "<font size=5><span class='danger'><b>\"SLOTH, WRATH, GLUTTONY, ACEDIA, ENVY, GREED, PRIDE! FIRES OF HELL AWAKEN!!\"</font></span>")
-	SEND_SOUND(world, sound('sound/hallucinations/veryfar_noise.ogg'))
+	send_to_playing_players("<font size=5><span class='danger'><b>\"SLOTH, WRATH, GLUTTONY, ACEDIA, ENVY, GREED, PRIDE! FIRES OF HELL AWAKEN!!\"</font></span>")
+	sound_to_playing_players('sound/hallucinations/veryfar_noise.ogg')
 	give_appropriate_spells()
 	D.convert_to_archdevil()
 	if(istype(D.loc, /obj/effect/dummy/slaughter/))
@@ -550,18 +550,6 @@ GLOBAL_LIST_INIT(devil_suffix, list(" the Red", " the Soulless", " the Master", 
 	parts += printplayer(owner)
 	parts += printdevilinfo()
 	parts += printobjectives(owner)
-	return parts.Join("<br>")
-
-/datum/antagonist/devil/roundend_report_footer()
-	//sintouched go here for now as a hack , TODO proper antag datum for these
-	var/list/parts = list()
-	if(SSticker.mode.sintouched.len)
-		parts += "<span class='header'>The sintouched were:</span>"
-		var/list/sintouchedUnique = uniqueList(SSticker.mode.sintouched)
-		for(var/S in sintouchedUnique)
-			var/datum/mind/sintouched_mind = S
-			parts += printplayer(sintouched_mind)
-			parts += printobjectives(sintouched_mind)
 	return parts.Join("<br>")
 
 //A simple super light weight datum for the codex gigas.

@@ -795,7 +795,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "Labor Camp Medical";
 	dir = 8;
-	network = list("Labor")
+	network = list("labor")
 	},
 /turf/open/floor/plasteel/white,
 /area/mine/laborcamp)
@@ -841,9 +841,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/mine/laborcamp)
 "aB" = (
 /obj/machinery/door/airlock/medical/glass{
-	id_tag = null;
-	name = "Infirmary";
-	req_access_txt = "0"
+	name = "Infirmary"
 	},
 /turf/open/floor/plasteel/white,
 /area/mine/laborcamp)
@@ -891,8 +889,10 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /turf/open/floor/plasteel,
 /area/mine/laborcamp)
 "aI" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
 /obj/machinery/door/airlock{
-	cyclelinkeddir = 4;
 	name = "Labor Camp External Access"
 	},
 /turf/open/floor/plasteel,
@@ -930,7 +930,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "Labor Camp External";
 	dir = 4;
-	network = list("Labor")
+	network = list("labor")
 	},
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
@@ -966,7 +966,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/lavaland/surface/outdoors/explored)
 "aU" = (
 /obj/machinery/flasher{
-	id = "Labor"
+	id = "labor"
 	},
 /turf/closed/wall,
 /area/mine/laborcamp)
@@ -982,8 +982,10 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors/explored)
 "aY" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
 /obj/machinery/door/airlock/security/glass{
-	cyclelinkeddir = 4;
 	name = "Labor Camp Shuttle Security Airlock";
 	req_access_txt = "2"
 	},
@@ -994,7 +996,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 	dir = 1
 	},
 /obj/machinery/button/door{
-	id = "Labor";
+	id = "labor";
 	name = "Labor Camp Lockdown";
 	pixel_y = 28;
 	req_access_txt = "2"
@@ -1003,7 +1005,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/mine/laborcamp)
 "ba" = (
 /obj/machinery/door/poddoor/preopen{
-	id = "Labor";
+	id = "labor";
 	name = "labor camp blast door"
 	},
 /turf/open/floor/plasteel,
@@ -1011,7 +1013,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 "bb" = (
 /obj/machinery/camera{
 	c_tag = "Labor Camp Central";
-	network = list("Labor")
+	network = list("labor")
 	},
 /turf/open/floor/plasteel,
 /area/mine/laborcamp)
@@ -1110,7 +1112,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "EVA";
 	dir = 4;
-	network = list("MINE")
+	network = list("mine")
 	},
 /obj/machinery/airalarm{
 	dir = 4;
@@ -1146,10 +1148,11 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /turf/open/floor/plating/asteroid/basalt/lava_land_surface,
 /area/mine/eva)
 "bx" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
 /obj/machinery/door/airlock/security/glass{
-	cyclelinkeddir = 4;
-	name = "Labor Camp Shuttle Prisoner Airlock";
-	req_access_txt = "0"
+	name = "Labor Camp Shuttle Prisoner Airlock"
 	},
 /turf/open/floor/plasteel,
 /area/mine/laborcamp)
@@ -1191,7 +1194,6 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/mine/laborcamp)
 "bC" = (
 /obj/machinery/airalarm{
-	frequency = 1439;
 	pixel_y = 23
 	},
 /obj/machinery/computer/shuttle/mining{
@@ -1278,7 +1280,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /turf/open/floor/plating,
 /area/mine/production)
 "bO" = (
-/obj/item/device/radio/beacon,
+/obj/item/device/beacon,
 /turf/open/floor/plasteel/purple/corner{
 	dir = 8
 	},
@@ -1354,8 +1356,10 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 	},
 /area/mine/eva)
 "bX" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
 /obj/machinery/door/airlock/external{
-	cyclelinkeddir = 4;
 	glass = 1;
 	name = "Mining External Airlock";
 	opacity = 0;
@@ -1407,7 +1411,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 	},
 /obj/machinery/camera{
 	c_tag = "Labor Camp Monitoring";
-	network = list("Labor")
+	network = list("labor")
 	},
 /obj/structure/cable{
 	icon_state = "0-8"
@@ -1440,12 +1444,13 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /turf/open/floor/plating,
 /area/mine/laborcamp)
 "cj" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
 /obj/machinery/door/airlock/external{
-	cyclelinkeddir = 4;
 	glass = 1;
 	name = "Mining Shuttle Airlock";
-	opacity = 0;
-	req_access_txt = "0"
+	opacity = 0
 	},
 /turf/open/floor/plasteel,
 /area/mine/production)
@@ -1534,7 +1539,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 "cx" = (
 /obj/machinery/computer/security{
 	name = "Labor Camp Monitoring";
-	network = list("Labor")
+	network = list("labor")
 	},
 /turf/open/floor/plasteel,
 /area/mine/laborcamp/security)
@@ -1602,8 +1607,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/mine/production)
 "cJ" = (
 /obj/machinery/door/airlock{
-	name = "Closet";
-	req_access_txt = "0"
+	name = "Closet"
 	},
 /turf/open/floor/plating,
 /area/mine/production)
@@ -1736,7 +1740,6 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 "dc" = (
 /obj/structure/closet/crate,
 /obj/machinery/airalarm{
-	frequency = 1439;
 	pixel_y = 23
 	},
 /obj/effect/turf_decal/bot,
@@ -1799,7 +1802,6 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 	dir = 8
 	},
 /obj/machinery/airalarm{
-	frequency = 1439;
 	pixel_y = 23
 	},
 /obj/machinery/iv_drip,
@@ -1904,7 +1906,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "Communications Relay";
 	dir = 8;
-	network = list("MINE")
+	network = list("mine")
 	},
 /obj/effect/baseturf_helper/picky/lava_land/basalt{
 	whitelist = /turf/open/floor
@@ -1938,7 +1940,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "Sleeper Room";
 	dir = 1;
-	network = list("MINE")
+	network = list("mine")
 	},
 /turf/open/floor/plasteel/white,
 /area/mine/living_quarters)
@@ -2002,7 +2004,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "Shuttle Docking Foyer";
 	dir = 8;
-	network = list("MINE")
+	network = list("mine")
 	},
 /obj/machinery/newscaster{
 	pixel_x = 30;
@@ -2027,7 +2029,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "Processing Area Room";
 	dir = 8;
-	network = list("MINE")
+	network = list("mine")
 	},
 /obj/item/device/radio/intercom{
 	dir = 8;
@@ -2067,9 +2069,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/mine/living_quarters)
 "dR" = (
 /obj/machinery/door/airlock/medical/glass{
-	id_tag = null;
-	name = "Infirmary";
-	req_access_txt = "0"
+	name = "Infirmary"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plasteel/white,
@@ -2148,13 +2148,12 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 "ed" = (
 /obj/machinery/camera{
 	c_tag = "Crew Area Hallway West";
-	network = list("MINE")
+	network = list("mine")
 	},
 /turf/open/floor/plasteel,
 /area/mine/living_quarters)
 "ee" = (
 /obj/machinery/airalarm{
-	frequency = 1439;
 	pixel_y = 23
 	},
 /turf/open/floor/plasteel,
@@ -2196,7 +2195,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 "ej" = (
 /obj/machinery/camera{
 	c_tag = "Crew Area Hallway East";
-	network = list("MINE")
+	network = list("mine")
 	},
 /turf/open/floor/plasteel/purple/corner{
 	dir = 1
@@ -2551,7 +2550,6 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /area/mine/living_quarters)
 "fc" = (
 /obj/machinery/airalarm{
-	frequency = 1439;
 	pixel_y = 23
 	},
 /turf/open/floor/plasteel/purple/corner{
@@ -2562,7 +2560,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "Storage";
 	dir = 2;
-	network = list("MINE")
+	network = list("mine")
 	},
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/plasteel/brown{
@@ -2573,7 +2571,6 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/structure/bed,
 /obj/item/bedsheet/brown,
 /obj/machinery/airalarm{
-	frequency = 1439;
 	pixel_y = 23
 	},
 /turf/open/floor/carpet,
@@ -2668,7 +2665,6 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 	name = "Door Bolt Control";
 	normaldoorcontrol = 1;
 	pixel_x = 25;
-	req_access_txt = "0";
 	specialfunctions = 4
 	},
 /turf/open/floor/carpet,
@@ -2677,7 +2673,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "Dormitories";
 	dir = 4;
-	network = list("MINE")
+	network = list("mine")
 	},
 /turf/open/floor/plasteel/purple/corner{
 	dir = 1
@@ -2783,7 +2779,7 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /obj/machinery/camera{
 	c_tag = "Crew Area";
 	dir = 1;
-	network = list("MINE")
+	network = list("mine")
 	},
 /obj/machinery/computer/security/telescreen/entertainment{
 	pixel_y = -32
@@ -2814,7 +2810,6 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 	name = "Door Bolt Control";
 	normaldoorcontrol = 1;
 	pixel_x = 25;
-	req_access_txt = "0";
 	specialfunctions = 4
 	},
 /turf/open/floor/carpet,
@@ -2845,7 +2840,6 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 	name = "Door Bolt Control";
 	normaldoorcontrol = 1;
 	pixel_x = 25;
-	req_access_txt = "0";
 	specialfunctions = 4
 	},
 /turf/open/floor/carpet,
@@ -3995,31 +3989,38 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /turf/open/lava/smooth/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "WA" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
 /obj/machinery/door/airlock{
-	cyclelinkeddir = 8;
 	name = "Labor Camp External Access"
 	},
 /turf/open/floor/plasteel,
 /area/mine/laborcamp)
 "WB" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
 /obj/machinery/door/airlock/security/glass{
-	cyclelinkeddir = 8;
 	name = "Labor Camp Shuttle Security Airlock";
 	req_access_txt = "2"
 	},
 /turf/open/floor/plasteel,
 /area/mine/laborcamp)
 "WC" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
 /obj/machinery/door/airlock/security/glass{
-	cyclelinkeddir = 8;
-	name = "Labor Camp Shuttle Prisoner Airlock";
-	req_access_txt = "0"
+	name = "Labor Camp Shuttle Prisoner Airlock"
 	},
 /turf/open/floor/plasteel,
 /area/mine/laborcamp)
 "WD" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
 /obj/machinery/door/airlock/external{
-	cyclelinkeddir = 8;
 	glass = 1;
 	name = "Mining External Airlock";
 	opacity = 0;
@@ -4028,12 +4029,13 @@ ivbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbp
 /turf/open/floor/plasteel,
 /area/mine/eva)
 "WE" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
 /obj/machinery/door/airlock/external{
-	cyclelinkeddir = 8;
 	glass = 1;
 	name = "Mining Shuttle Airlock";
-	opacity = 0;
-	req_access_txt = "0"
+	opacity = 0
 	},
 /turf/open/floor/plasteel,
 /area/mine/production)

@@ -9,7 +9,7 @@
 	density = TRUE
 	var/win_prob = 5
 
-/obj/structure/cursed_slot_machine/attack_hand(mob/living/carbon/human/user)
+/obj/structure/cursed_slot_machine/interact(mob/living/carbon/human/user)
 	if(!istype(user))
 		return
 	if(obj_flags & IN_USE)
@@ -58,6 +58,9 @@
 	qdel(src)
 
 /obj/structure/cursed_money/attack_hand(mob/living/user)
+	. = ..()
+	if(.)
+		return
 	user.visible_message("<span class='warning'>[user] opens the bag and \
 		and removes a die. The bag then vanishes.</span>",
 		"<span class='boldwarning'>You open the bag...!</span>\n\
@@ -100,9 +103,16 @@
 /obj/structure/mirror/magic/pride/curse(mob/user)
 	user.visible_message("<span class='danger'><B>The ground splits beneath [user] as [user.p_their()] hand leaves the mirror!</B></span>", \
 	"<span class='notice'>Perfect. Much better! Now <i>nobody</i> will be able to resist yo-</span>")
+
 	var/turf/T = get_turf(user)
-	T.ChangeTurf(/turf/open/chasm/straight_down)
+	var/list/levels = SSmapping.levels_by_trait(ZTRAIT_SPACE_RUINS)
+	var/turf/dest
+	if (levels.len)
+		dest = locate(T.x, T.y, pick(levels))
+
+	T.ChangeTurf(/turf/open/chasm)
 	var/turf/open/chasm/C = T
+	C.set_target(dest)
 	C.drop(user)
 
 //can't be bothered to do sloth right now, will make later

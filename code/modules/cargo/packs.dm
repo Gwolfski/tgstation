@@ -1127,7 +1127,6 @@
 	group = "Science"
 	crate_type = /obj/structure/closet/crate/science
 
-<<<<<<< HEAD
 /datum/supply_pack/science/bz
 	name = "BZ canister"
 	cost = 4000
@@ -1140,12 +1139,11 @@
 /datum/supply_pack/science/robotics
 	name = "Robotics Assembly Crate"
 	cost = 1000
-=======
+
 /datum/supply_pack/science/robotics/mecha_odysseus
 	name = "Circuit Crate (Odysseus)"
 	desc = "Ever wanted to build your own giant medical robot? Well now you can! Contains the Odysseus main control board and Odysseus peripherals board. Requires Robotics access to open."
 	cost = 2500
->>>>>>> 5191d4dee078c60576a81d6ded32f05ae479a923
 	access = ACCESS_ROBOTICS
 	contains = list(/obj/item/circuitboard/mecha/odysseus/peripherals,
 					/obj/item/circuitboard/mecha/odysseus/main)
@@ -1268,7 +1266,7 @@
 					/obj/item/reagent_containers/food/snacks/grown/banana,
 					/obj/item/reagent_containers/food/snacks/grown/banana)
 	crate_name = "food crate"
-<<<<<<< HEAD
+
 
 /datum/supply_pack/organic/pizza
 	name = "Pizza Crate"
@@ -1414,8 +1412,7 @@
 	contains = list(/mob/living/simple_animal/pet/fox,
 					/obj/item/clothing/neck/petcollar)
 	crate_name = "fox crate"
-=======
->>>>>>> 5191d4dee078c60576a81d6ded32f05ae479a923
+
 
 /datum/supply_pack/organic/hydroponics/beekeeping_fullkit
 	name = "Beekeeping Starter Crate"
@@ -1496,39 +1493,6 @@
 					/obj/item/device/flashlight/glowstick/pink)
 	crate_name = "party equipment crate"
 
-/datum/supply_pack/organic/pizza
-	name = "Pizza Crate"
-	desc = "Best prices on this side of the galaxy. All deliveries are guaranteed to be 99% anomaly-free!"
-	cost = 6000 // Best prices this side of the galaxy.
-	contains = list(/obj/item/pizzabox/margherita,
-					/obj/item/pizzabox/mushroom,
-					/obj/item/pizzabox/meat,
-					/obj/item/pizzabox/vegetable,
-					/obj/item/pizzabox/pineapple)
-	crate_name = "pizza crate"
-	var/static/anomalous_box_provided = FALSE
-
-/datum/supply_pack/organic/pizza/fill(obj/structure/closet/crate/C)
-	. = ..()
-	if(!anomalous_box_provided)
-		for(var/obj/item/pizzabox/P in C)
-			if(prob(1)) //1% chance for each box, so 4% total chance per order
-				var/obj/item/pizzabox/infinite/fourfiveeight = new(C)
-				fourfiveeight.boxtag = P.boxtag
-				qdel(P)
-				anomalous_box_provided = TRUE
-				log_game("An anomalous pizza box was provided in a pizza crate at during cargo delivery")
-				if(prob(50))
-					addtimer(CALLBACK(src, .proc/anomalous_pizza_report), rand(300, 1800))
-				else
-					message_admins("An anomalous pizza box was silently created with no command report in a pizza crate delivery.")
-				break
-
-/datum/supply_pack/organic/pizza/proc/anomalous_pizza_report()
-	print_command_report("[station_name()], our anomalous materials divison has reported a missing object that is highly likely to have been sent to your station during a routine cargo \
-	delivery. Please search all crates and manifests provided with the delivery and return the object if is located. The object resembles a standard <b>\[DATA EXPUNGED\]</b> and is to be \
-	considered <b>\[REDACTED\]</b> and returned at your leisure. Note that objects the anomaly produces are specifically attuned exactly to the individual opening the anomaly; regardless \
-	of species, the individual will find the object edible and it will taste great according to their personal definitions, which vary significantly based on person and species.")
 
 /datum/supply_pack/organic/potted_plants
 	name = "Potted Plants Crate"
@@ -2307,10 +2271,10 @@
 /datum/supply_pack/misc/bicycle
 	name = "Bicycle"
 	cost = 1000000
-	contains = list(/obj/vehicle/bicycle)
+	contains = list(/obj/vehicle/ridden/bicycle)
 	crate_name = "Bicycle Crate"
 	crate_type = /obj/structure/closet/crate/large
-	
+
 /datum/supply_pack/misc/fruit_basket
 	name = "Fruit Basket"
 	cost = 2000

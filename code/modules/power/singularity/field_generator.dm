@@ -18,6 +18,11 @@ field_generator power level display
 #define FG_CHARGING 1
 #define FG_ONLINE 2
 
+//field generator construction defines
+#define FG_UNSECURED 0
+#define FG_SECURED 1
+#define FG_WELDED 2
+
 /obj/machinery/field/generator
 	name = "field generator"
 	desc = "A large thermal battery that projects a high amount of energy when powered."
@@ -60,6 +65,9 @@ field_generator power level display
 		calc_power()
 
 /obj/machinery/field/generator/attack_hand(mob/user)
+	. = ..()
+	if(.)
+		return
 	if(state == FG_WELDED)
 		if(get_dist(src, user) <= 1)//Need to actually touch the thing to turn it on
 			if(active >= FG_CHARGING)

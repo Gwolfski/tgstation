@@ -485,7 +485,7 @@ BOMBCAP 20
 LAVALAND_BUDGET 60
 
 ## Space Ruin Budged
-Space_Budget 16
+Space_Budget 32
 
 ## Time in ds from when a player latejoins till the arrival shuttle docks at the station
 ## Must be at least 30. At least 55 recommended to be visually/aurally appropriate
@@ -499,7 +499,7 @@ ARRIVALS_SHUTTLE_DOCK_WINDOW 55
 
 ## How many wirechewing rodents you want to spawn on exposed maintenane wires at the start of the round. You may wish to set this to 0 if you're testing powernets.
 
-MICE_ROUNDSTART 5
+MICE_ROUNDSTART 2
 
 ## If the percentage of players alive (doesn't count conversions) drops below this threshold the emergency shuttle will be forcefully called (provided it can be)
 #EMERGENCY_SHUTTLE_AUTOCALL_THRESHOLD 0.2
@@ -507,12 +507,9 @@ MICE_ROUNDSTART 5
 ## Determines if players are allowed to print integrated circuits, uncomment to allow.
 IC_PRINTING
 
-<<<<<<< HEAD
-=======
-
 ## Uncomment to allow roundstart trait selection in the character setup menu.
 ROUNDSTART_TRAITS
->>>>>>> tgstation-master
+
 
 ## Uncomment to disable human moods.
 #DISABLE_HUMAN_MOOD
@@ -524,9 +521,8 @@ ENABLE_NIGHT_SHIFTS
 RANDOMIZE_SHIFT_TIME
 
 ## Sets shift time to server time at roundstart. Overridden by RANDOMIZE_SHIFT_TIME ##
-<<<<<<< HEAD
+
 #SHIFT_TIME_REALTIME
 
-=======
-#SHIFT_TIME_REALTIME
->>>>>>> tgstation-master
+
+

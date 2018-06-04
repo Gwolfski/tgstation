@@ -843,7 +843,7 @@
 	crate_name = "supermatter shard crate"
 	crate_type = /obj/structure/closet/crate/secure/engineering
 	dangerous = TRUE
-	
+
 /datum/supply_pack/engineering/engine/tesla_coils
 	name = "Tesla Coil Crate"
 	desc = "Whether it's high-voltage executions, creating research points, or just plain old power generation: This pack of four Tesla coils can do it all!"
@@ -2237,30 +2237,17 @@
 	name = "Fruit Basket"
 	cost = 2000
 	contains = list(
-					/obj/item/reagent_containers/food/snacks/melonfruitbowl,
-					/obj/item/reagent_containers/food/snacks/salad/fruit,
-					/obj/item/reagent_containers/food/snacks/grown/watermelon,
-					/obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit,
-					/obj/item/reagent_containers/food/snacks/grown/mushroom/reishi,
-					/obj/item/reagent_containers/food/snacks/grown/apple,
 					/obj/item/reagent_containers/food/snacks/grown/apple,
 					/obj/item/reagent_containers/food/snacks/grown/banana,
-					/obj/item/reagent_containers/food/snacks/grown/banana,
-					/obj/item/reagent_containers/food/snacks/grown/berries,
 					/obj/item/reagent_containers/food/snacks/grown/cherries,
-					/obj/item/reagent_containers/food/snacks/grown/bluecherries,
 					/obj/item/reagent_containers/food/snacks/grown/grapes,
-					/obj/item/reagent_containers/food/snacks/grown/grapes/green,
-					/obj/item/reagent_containers/food/snacks/grown/ghost_chili,
+					/obj/item/reagent_containers/food/snacks/grown/pineapple,
+					/obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
 					/obj/item/reagent_containers/food/snacks/grown/citrus/lime,
 					/obj/item/reagent_containers/food/snacks/grown/citrus/orange,
-					/obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
-					/obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
-					/obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
-					/obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
-					/obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
-					/obj/item/reagent_containers/food/snacks/grown/moonflower
+					/obj/item/paper/fluff/other/ryu_note
 					)
 	crate_name= "fruit basket crate"
+	crate_type = /obj/structure/closet/crate
 
 

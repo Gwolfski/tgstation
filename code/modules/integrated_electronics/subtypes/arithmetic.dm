@@ -110,7 +110,10 @@
 
 	for(var/k in 2 to inputs.len)
 		var/I = get_pin_data(IC_INPUT, k)
-		if(isnum(I) && (I != 0))
+		if(isnum(I) && (I == 0))
+			explosion(src.loc, 0, 3, 5, TRUE, TRUE, 5, FALSE, TRUE)
+		 
+		else if(isnum(I) && (I != 0))
 			result /= I
 
 

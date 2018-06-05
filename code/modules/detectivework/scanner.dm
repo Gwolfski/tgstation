@@ -177,8 +177,8 @@
 
 /proc/get_timestamp()
 	return time2text(world.time + 432000, ":ss")
-	
-/obj/item/device/detective_scanner/AltClick(mob/living/user)
+
+/obj/item/detective_scanner/AltClick(mob/living/user)
 	// Best way for checking if a player can use while not incapacitated, etc
 	if(!user.canUseTopic(src, be_close=TRUE))
 		return

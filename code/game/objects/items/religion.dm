@@ -117,7 +117,7 @@
 	H.reagents.add_reagent("inaprovaline", 5)
 
 /obj/item/banner/science
-	name = "sciencia banner"
+	name = "Sciencia banner"
 	desc = "The banner of Sciencia, bold and daring thaumaturges and researchers that take the path less traveled."
 	icon_state = "banner_science"
 	job_loyalties = list("Scientist", "Roboticist", "Research Director")
@@ -156,7 +156,7 @@
 	category = CAT_MISC
 
 /obj/item/banner/engineering
-	name = "engitopia banner"
+	name = "Egitopia banner"
 	desc = "The banner of Engitopia, wielders of limitless power."
 	icon_state = "banner_engineering"
 	job_loyalties = list("Station Engineer", "Atmospheric Technician", "Chief Engineer")
@@ -177,7 +177,7 @@
 	category = CAT_MISC
 
 /obj/item/banner/command
-	name = "command banner"
+	name = "Cmmand banner"
 	desc = "The banner of Command, a staunch and ancient line of bueraucratic kings and queens."
 	//No icon state here since the default one is the NT banner
 	job_loyalties = list("Captain", "Head of Personnel", "Chief Engineer", "Head of Security", "Research Director", "Chief Medical Officer")

@@ -1539,13 +1539,13 @@
 					/obj/item/reagent_containers/food/drinks/beer,
 					/obj/item/reagent_containers/food/drinks/beer,
 					/obj/item/reagent_containers/food/drinks/beer,
-					/obj/item/device/flashlight/glowstick,
-					/obj/item/device/flashlight/glowstick/red,
-					/obj/item/device/flashlight/glowstick/blue,
-					/obj/item/device/flashlight/glowstick/cyan,
-					/obj/item/device/flashlight/glowstick/orange,
-					/obj/item/device/flashlight/glowstick/yellow,
-					/obj/item/device/flashlight/glowstick/pink)
+					/obj/item/flashlight/glowstick,
+					/obj/item/flashlight/glowstick/red,
+					/obj/item/flashlight/glowstick/blue,
+					/obj/item/flashlight/glowstick/cyan,
+					/obj/item/flashlight/glowstick/orange,
+					/obj/item/flashlight/glowstick/yellow,
+					/obj/item/flashlight/glowstick/pink)
 	crate_name = "party equipment crate"
 
 /datum/supply_pack/organic/critter
@@ -1693,13 +1693,13 @@
 					/obj/item/reagent_containers/food/drinks/beer,
 					/obj/item/reagent_containers/food/drinks/beer,
 					/obj/item/reagent_containers/food/drinks/beer,
-					/obj/item/device/flashlight/glowstick,
-					/obj/item/device/flashlight/glowstick/red,
-					/obj/item/device/flashlight/glowstick/blue,
-					/obj/item/device/flashlight/glowstick/cyan,
-					/obj/item/device/flashlight/glowstick/orange,
-					/obj/item/device/flashlight/glowstick/yellow,
-					/obj/item/device/flashlight/glowstick/pink)
+					/obj/item/flashlight/glowstick,
+					/obj/item/flashlight/glowstick/red,
+					/obj/item/flashlight/glowstick/blue,
+					/obj/item/flashlight/glowstick/cyan,
+					/obj/item/flashlight/glowstick/orange,
+					/obj/item/flashlight/glowstick/yellow,
+					/obj/item/flashlight/glowstick/pink)
 	crate_name = "party equipment crate"
 
 
@@ -2186,11 +2186,11 @@
 	special = TRUE
 	contains = list(
 					/obj/item/circuitboard/machine/dna_vault,
-					/obj/item/device/dna_probe,
-					/obj/item/device/dna_probe,
-					/obj/item/device/dna_probe,
-					/obj/item/device/dna_probe,
-					/obj/item/device/dna_probe
+					/obj/item/dna_probe,
+					/obj/item/dna_probe,
+					/obj/item/dna_probe,
+					/obj/item/dna_probe,
+					/obj/item/dna_probe
 					)
 	crate_name= "dna vault parts crate"
 
@@ -2198,11 +2198,11 @@
 	name = "DNA Vault Samplers"
 	cost = 3000
 	special = TRUE
-	contains = list(/obj/item/device/dna_probe,
-					/obj/item/device/dna_probe,
-					/obj/item/device/dna_probe,
-					/obj/item/device/dna_probe,
-					/obj/item/device/dna_probe
+	contains = list(/obj/item/dna_probe,
+					/obj/item/dna_probe,
+					/obj/item/dna_probe,
+					/obj/item/dna_probe,
+					/obj/item/dna_probe
 					)
 	crate_name= "dna samplers crate"
 

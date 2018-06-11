@@ -117,7 +117,7 @@
 	H.reagents.add_reagent("inaprovaline", 5)
 
 /obj/item/banner/science
-	name = "sciencia banner"
+	name = "Sciencia banner"
 	desc = "The banner of Sciencia, bold and daring thaumaturges and researchers that take the path less traveled."
 	icon_state = "banner_science"
 	job_loyalties = list("Scientist", "Roboticist", "Research Director")
@@ -156,7 +156,7 @@
 	category = CAT_MISC
 
 /obj/item/banner/engineering
-	name = "engitopia banner"
+	name = "Egitopia banner"
 	desc = "The banner of Engitopia, wielders of limitless power."
 	icon_state = "banner_engineering"
 	job_loyalties = list("Station Engineer", "Atmospheric Technician", "Chief Engineer")
@@ -177,7 +177,7 @@
 	category = CAT_MISC
 
 /obj/item/banner/command
-	name = "command banner"
+	name = "Cmmand banner"
 	desc = "The banner of Command, a staunch and ancient line of bueraucratic kings and queens."
 	//No icon state here since the default one is the NT banner
 	job_loyalties = list("Captain", "Head of Personnel", "Chief Engineer", "Head of Security", "Research Director", "Chief Medical Officer")
@@ -290,7 +290,7 @@
 /obj/item/godstaff/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(staffcooldown + staffwait > world.time)
 		return
-	user.visible_message("[user] chants deeply and waves their staff!")
+	user.visible_message("[user] chants deeply and waves [user.p_their()] staff!")
 	if(do_after(user, 20,1,src))
 		target.add_atom_colour(conversion_color, WASHABLE_COLOUR_PRIORITY) //wololo
 	staffcooldown = world.time
@@ -325,7 +325,7 @@
 	icon_state = "crusader"
 	w_class = WEIGHT_CLASS_NORMAL
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 50, "energy" = 40, "bomb" = 60, "bio" = 0, "rad" = 0, "fire" = 60, "acid" = 60) //does this even do anything on boots?
-	flags_1 = NOSLIP_1
+	clothing_flags = NOSLIP
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
 	heat_protection = FEET

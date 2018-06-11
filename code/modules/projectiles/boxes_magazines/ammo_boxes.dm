@@ -5,6 +5,7 @@
 	ammo_type = /obj/item/ammo_casing/a357
 	max_ammo = 7
 	multiple_sprites = 1
+	materials = list(MAT_METAL = 20000)
 
 /obj/item/ammo_box/c38
 	name = "speed loader (.38)"
@@ -13,27 +14,32 @@
 	ammo_type = /obj/item/ammo_casing/c38
 	max_ammo = 6
 	multiple_sprites = 1
+	materials = list(MAT_METAL = 20000)
 
 /obj/item/ammo_box/c9mm
 	name = "ammo box (9mm)"
+	desc = "A box containing up to 30 9mm bullets"
 	icon_state = "9mmbox"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	max_ammo = 30
 
 /obj/item/ammo_box/c10mm
 	name = "ammo box (10mm)"
+	desc = "A box containing up to 20 10mm bullets"
 	icon_state = "10mmbox"
 	ammo_type = /obj/item/ammo_casing/c10mm
 	max_ammo = 20
 
 /obj/item/ammo_box/c45
 	name = "ammo box (.45)"
+	desc = "A box containing up to 20 .45 bullets"
 	icon_state = "45box"
 	ammo_type = /obj/item/ammo_casing/c45
 	max_ammo = 20
 
 /obj/item/ammo_box/a40mm
 	name = "ammo box (40mm grenades)"
+	desc = "A box containing up to 40mm grenades"
 	icon_state = "40mm"
 	ammo_type = /obj/item/ammo_casing/a40mm
 	max_ammo = 4
@@ -41,7 +47,7 @@
 
 /obj/item/ammo_box/a762
 	name = "stripper clip (7.62mm)"
-	desc = "A stripper clip."
+	desc = "A stripper clip. Contains up to 7.62mm rounds."
 	icon_state = "762"
 	ammo_type = /obj/item/ammo_casing/a762
 	max_ammo = 5
@@ -49,17 +55,21 @@
 
 /obj/item/ammo_box/n762
 	name = "ammo box (7.62x38mmR)"
+	desc = "A box containing up to 7.52x48mm rounds."
 	icon_state = "10mmbox"
 	ammo_type = /obj/item/ammo_casing/n762
 	max_ammo = 14
 
 /obj/item/ammo_box/foambox
 	name = "ammo box (Foam Darts)"
+	desc = "A box containing up to 40 harmless foam darts."
 	icon = 'icons/obj/guns/toy.dmi'
 	icon_state = "foambox"
 	ammo_type = /obj/item/ammo_casing/caseless/foam_dart
 	max_ammo = 40
+	materials = list(MAT_METAL = 500)
 
 /obj/item/ammo_box/foambox/riot
 	icon_state = "foambox_riot"
 	ammo_type = /obj/item/ammo_casing/caseless/foam_dart/riot
+	materials = list(MAT_METAL = 50000)

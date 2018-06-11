@@ -1,5 +1,6 @@
 /obj/item/ammo_box/magazine/sniper_rounds
 	name = "sniper rounds (.50)"
+	desc = "A high-power round designed for sniper rifles."
 	icon_state = ".50mag"
 	ammo_type = /obj/item/ammo_casing/p50
 	max_ammo = 6

@@ -447,3 +447,7 @@
 /datum/map_template/shuttle/labour/micro
 	suffix = "micro"
 	name = "labour shuttle (Micro)"
+
+// /datum/map_template_/shuttle/science/micro
+//  suffix ="micro"
+//  name = "Microstation Science Ferry"

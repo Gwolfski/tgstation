@@ -13,6 +13,27 @@
 	var/start_eject = 0
 	var/eject_range = 2
 
+/obj/structure/disposaloutlet/floor
+	desc = "An outlet for the pneumatic disposal system. This one sits flush with the floor."
+	icon_state = "outlet-floor"
+	density = FALSE
+	layer = TABLE_LAYER - 0.1
+
+/obj/structure/disposaloutlet/floor/Initialize(mapload, obj/structure/disposalconstruct/make_from)
+	. = ..()
+	if(make_from)
+		setDir(make_from.dir)
+		make_from.forceMove(src)
+		stored = make_from
+	else
+		stored = new /obj/structure/disposalconstruct(src, null , SOUTH , FALSE , src)
+
+	target = get_ranged_target_turf(src, dir, 0)
+
+	trunk = locate() in loc
+	if(trunk)
+		trunk.linked = src	// link the pipe trunk to self
+
 /obj/structure/disposaloutlet/Initialize(mapload, obj/structure/disposalconstruct/make_from)
 	. = ..()
 	if(make_from)

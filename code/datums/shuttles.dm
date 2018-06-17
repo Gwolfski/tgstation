@@ -448,6 +448,6 @@
 	suffix = "micro"
 	name = "labour shuttle (Micro)"
 
-// /datum/map_template_/shuttle/science/micro
-//  suffix ="micro"
-//  name = "Microstation Science Ferry"
+/datum/map_template_/shuttle/science/micro
+  suffix ="micro"
+  name = "Microstation Science Ferry"

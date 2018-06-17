@@ -16,3 +16,22 @@
 	height = 16
 	dir = WEST
 	port_direction = SOUTH
+
+/obj/machinery/computer/shuttle/microstation/sselevator
+	name = "Elevator controls"
+	desc = "A set of simple elevator controls"
+	icon_screen = "shuttle"
+	icon_keyboard = "tech_key"
+	light_color = LIGHT_COLOR_CYAN
+	shuttleId = "ao_elevator"
+	possible_destinations = "ao_top;ao_bottom"
+
+/obj/docking_port/mobile/ao_elevator
+	name = "Asteroid Elevator"
+	id = "ao_elevator"
+	dheight = 0
+	dwidth = 0
+	width = 5
+	height = 4
+	dir = WEST
+	port_direction = SOUTH

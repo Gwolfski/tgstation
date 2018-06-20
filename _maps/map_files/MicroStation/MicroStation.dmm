@@ -1261,7 +1261,7 @@
 "aym" = (/obj/structure/table,/obj/item/storage/toolbox/electrical{pixel_x = 1; pixel_y = 6},/obj/item/clothing/head/welding{pixel_x = -3; pixel_y = 5},/obj/item/clothing/glasses/welding,/turf/open/floor/plasteel/purple/side{dir = 1},/area/science)
 "ayn" = (/obj/structure/table,/obj/machinery/chem_dispenser/drinks/beer,/turf/open/floor/wood,/area/crew_quarters/abandoned_gambling_den)
 "ayo" = (/obj/structure/table/wood,/obj/item/soap/nanotrasen,/turf/open/floor/wood{icon_state = "wood-broken7"},/area/crew_quarters/abandoned_gambling_den)
-"ayp" = (/obj/structure/table/wood,/obj/machinery/firealarm/partyalarm,/obj/effect/spawner/lootdrop/gambling,/obj/effect/spawner/lootdrop/gambling,/turf/open/floor/wood{icon_state = "wood-broken5"},/area/crew_quarters/abandoned_gambling_den)
+"ayp" = (/obj/structure/table/wood,/obj/machinery/firealarm,/obj/effect/spawner/lootdrop/gambling,/obj/effect/spawner/lootdrop/gambling,/turf/open/floor/wood{icon_state = "wood-broken5"},/area/crew_quarters/abandoned_gambling_den)
 "ayq" = (/obj/structure/table/wood,/obj/effect/spawner/lootdrop/maintenance{lootcount = 4; name = "4maintenance loot spawner"},/obj/effect/spawner/lootdrop/gambling,/obj/effect/spawner/lootdrop/gambling,/obj/effect/spawner/lootdrop/gambling,/turf/open/floor/wood,/area/crew_quarters/abandoned_gambling_den)
 "ayr" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/disposalpipe/segment{dir = 5},/obj/machinery/atmospherics/pipe/simple/supplymain/hidden{dir = 4},/turf/open/floor/plasteel{dir = 1},/area/maintenance/central/secondary)
 "ays" = (/obj/effect/spawner/structure/window,/turf/open/floor/plating,/area/maintenance/aft/secondary)

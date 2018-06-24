@@ -40,3 +40,23 @@
 /area/ss_asteroid/top/elevator
 	name = "Elevator Room"
 	icon_state = "gateway"
+
+/area/ss_asteroid/bottom/dorm
+	name = "Dorm Hallway"
+	icon_state = "crew_quarters"
+
+/area/ss_asteroid/bottom/dorm/one
+	name = "Dorm One"
+	icon_state = "spacecontent1"
+
+/area/ss_asteroid/bottom/dorm/two
+	name = "Dorm Two"
+	icon_state = "spacecontent2"
+
+/area/ss_asteroid/bottom/dorm/three
+	name = "Dorm Three"
+	icon_state = "spacecontent3"
+
+/area/ss_asteroid/bottom/dorm/four
+	name = "Dorm Four"
+	icon_state = "spacecontent4"

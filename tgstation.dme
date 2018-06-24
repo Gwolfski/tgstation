@@ -18,7 +18,6 @@
 #include "_maps\map_files\MicroStation\MicroStation.dmm"
 #include "_maps\map_files\Mining\asteroid.dmm"
 #include "_maps\map_files\Mining\asteroid_top.dmm"
-#include "_maps\shuttles\elevator_asteroid.dmm"
 #include "code\_compile_options.dm"
 #include "code\world.dm"
 #include "code\__DEFINES\_globals.dm"

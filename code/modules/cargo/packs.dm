@@ -1739,7 +1739,7 @@
 					/obj/item/storage/pill_bottle/lsd,
 					/obj/item/storage/pill_bottle/aranesp,
 					/obj/item/storage/pill_bottle/stimulant,
-					/obj/item/toy/cards/deck/syndicate,				
+					/obj/item/toy/cards/deck/syndicate,
 					/obj/item/reagent_containers/food/drinks/bottle/absinthe,
 					/obj/item/clothing/under/syndicate/tacticool,
 					/obj/item/storage/fancy/cigarettes/cigpack_syndicate,
@@ -2126,3 +2126,70 @@
 					/obj/item/toner,
 					/obj/item/toner)
 	crate_name = "toner crate"
+
+
+/datum/supply_pack/misc/fruit_basket
+  name = "Apology Fruit Basket"
+  contains = list(
+          /obj/item/reagent_containers/food/snacks/melonfruitbowl,
+          /obj/item/reagent_containers/food/snacks/salad/fruit,
+          /obj/item/reagent_containers/food/snacks/grown/watermelon,
+          /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit,
+          /obj/item/reagent_containers/food/snacks/grown/mushroom/reishi,
+          /obj/item/reagent_containers/food/snacks/grown/apple,
+          /obj/item/reagent_containers/food/snacks/grown/apple,
+          /obj/item/reagent_containers/food/snacks/grown/banana,
+          /obj/item/reagent_containers/food/snacks/grown/banana,
+          /obj/item/reagent_containers/food/snacks/grown/berries,
+          /obj/item/reagent_containers/food/snacks/grown/cherries,
+          /obj/item/reagent_containers/food/snacks/grown/bluecherries,
+          /obj/item/reagent_containers/food/snacks/grown/grapes,
+          /obj/item/reagent_containers/food/snacks/grown/grapes/green,
+          /obj/item/reagent_containers/food/snacks/grown/ghost_chili,
+          /obj/item/reagent_containers/food/snacks/grown/pineapple,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lime,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/orange,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/moonflower,
+          /obj/item/paper/fluff/other/ryu_note
+          )
+  crate_name= "fruit basket crate"
+  crate_type = /obj/structure/closet/crate
+
+  datum/supply_pack/misc/fruit_basket_buyable
+  name = "Fruit Basket"
+  cost = 2000
+  contains = list(
+          /obj/item/reagent_containers/food/snacks/melonfruitbowl,
+          /obj/item/reagent_containers/food/snacks/salad/fruit,
+          /obj/item/reagent_containers/food/snacks/grown/watermelon,
+          /obj/item/reagent_containers/food/snacks/grown/ash_flora/cactus_fruit,
+          /obj/item/reagent_containers/food/snacks/grown/mushroom/reishi,
+          /obj/item/reagent_containers/food/snacks/grown/apple,
+          /obj/item/reagent_containers/food/snacks/grown/apple,
+          /obj/item/reagent_containers/food/snacks/grown/banana,
+          /obj/item/reagent_containers/food/snacks/grown/banana,
+          /obj/item/reagent_containers/food/snacks/grown/berries,
+          /obj/item/reagent_containers/food/snacks/grown/cherries,
+          /obj/item/reagent_containers/food/snacks/grown/bluecherries,
+          /obj/item/reagent_containers/food/snacks/grown/grapes,
+          /obj/item/reagent_containers/food/snacks/grown/grapes/green,
+          /obj/item/reagent_containers/food/snacks/grown/ghost_chili,
+          /obj/item/reagent_containers/food/snacks/grown/pineapple,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lime,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/orange,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/citrus/lemon,
+          /obj/item/reagent_containers/food/snacks/grown/moonflower
+          )
+  crate_name= "fruit basket crate"
+  crate_type = /obj/structure/closet/crate

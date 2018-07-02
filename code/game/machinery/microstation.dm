@@ -35,3 +35,25 @@
 	height = 4
 	dir = WEST
 	port_direction = SOUTH
+
+/obj/machinery/power/apc/ss_asteroid/dorm1
+	areastring = "/area/ss_asteroid/bottom/dorm/one"
+	name = "Dorm 1 APC"
+	pixel_y = -23
+
+/obj/machinery/power/apc/ss_asteroid/dorm2
+	areastring = "/area/ss_asteroid/bottom/dorm/two"
+	name = "Dorm 2 APC"
+	pixel_y = -23
+
+/obj/machinery/power/apc/ss_asteroid/dorm3
+	areastring = "/area/ss_asteroid/bottom/dorm/three"
+	name = "Dorm 3 APC"
+	dir = 1
+	pixel_y = 24
+
+/obj/machinery/power/apc/ss_asteroid/dorm4
+	areastring = "/area/ss_asteroid/bottom/dorm/four"
+	name = "Dorm 4 APC"
+	dir = 1
+	pixel_y = 24

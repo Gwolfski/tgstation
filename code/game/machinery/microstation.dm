@@ -57,3 +57,21 @@
 	name = "Dorm 4 APC"
 	dir = 1
 	pixel_y = 24
+
+/obj/structure/closet/secure_closet/tech_secure
+	name = "Secure Tech Storage"
+	req_access = list(ACCESS_HEADS)
+	icon_state = "eng_secure"
+	max_integrity = 300
+	locked = TRUE
+	secure = TRUE
+	anchored = TRUE
+
+/obj/structure/closet/secure_closet/tech
+	name = "Tech Storage"
+	req_access = list(ACCESS_TECH_STORAGE)
+	icon_state = "eng_secure"
+	max_integrity = 201
+	locked = TRUE
+	secure = TRUE
+	anchored = TRUE

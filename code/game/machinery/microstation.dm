@@ -66,6 +66,7 @@
 	locked = TRUE
 	secure = TRUE
 	anchored = TRUE
+	storage_capacity = 60
 
 /obj/structure/closet/secure_closet/tech
 	name = "Tech Storage"

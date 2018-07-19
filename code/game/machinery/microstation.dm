@@ -6,6 +6,7 @@
 	light_color = LIGHT_COLOR_CYAN
 	shuttleId = "ss_shuttle"
 	possible_destinations = "ss_station;ss_asteroid"
+	circuit = /obj/item/circuitboard/computer/ssshuttle
 
 /obj/docking_port/mobile/ssshuttle
 	name = "SS Shuttle"
@@ -76,3 +77,7 @@
 	locked = TRUE
 	secure = TRUE
 	anchored = TRUE
+
+/obj/item/circuitboard/computer/ssshuttle
+	name = "Science Shuttle Controller (Computer Board)"
+	build_path = /obj/machinery/computer/shuttle/microstation/ssshuttle

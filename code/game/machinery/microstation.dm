@@ -81,3 +81,7 @@
 /obj/item/circuitboard/computer/ssshuttle
 	name = "Science Shuttle Controller (Computer Board)"
 	build_path = /obj/machinery/computer/shuttle/microstation/ssshuttle
+
+/obj/item/paper/fluff/other/scidisk_filter
+	name = "paper- 'IMPORTANT! READ ME!'"
+	info = "In order for your packages to reach the SciDisk, they must be tagged to a departament.<br>\n For best results, tag to Genetics for Viro and Genetics, tag to Medbay for Xeno, and tag to Chemistry for gas mixes."

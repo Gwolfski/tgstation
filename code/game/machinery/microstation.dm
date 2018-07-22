@@ -85,3 +85,38 @@
 /obj/item/paper/fluff/other/scidisk_filter
 	name = "paper- 'IMPORTANT! READ ME!'"
 	info = "In order for your packages to reach the SciDisk, they must be tagged to a departament.<br>\n For best results, tag to Genetics for Viro and Genetics, tag to Medbay for Xeno, and tag to Chemistry for gas mixes."
+
+/obj/machinery/power/apc/auto_name
+	auto_name = 1
+
+/obj/machinery/power/apc/auto_name/directional/north
+	dir = 1
+	pixel_y = 24
+
+/obj/machinery/power/apc/auto_name/directional/south
+	dir = 2
+	pixel_y = -23
+
+/obj/machinery/power/apc/auto_name/directional/east
+	dir = 4
+	pixel_x = 24
+
+/obj/machinery/power/apc/auto_name/directional/west
+	dir = 8
+	pixel_x = -25
+
+/obj/machinery/airalarm/directional/north
+	dir = 2
+	pixel_y = 24
+
+/obj/machinery/airalarm/directional/south
+	pixel_y = -24
+	dir = 1
+
+/obj/machinery/airalarm/directional/east
+	dir = 8
+	pixel_x = 24
+
+/obj/machinery/airalarm/directional/west
+	dir = 4
+	pixel_x = -24

@@ -289,7 +289,7 @@
 /datum/disease/transformation/bee
 
 	name = "Bee Transformation"
-	cure_text = "An spot of honey."
+	cure_text = "A spot of honey."
 	cures = list("honey")
 	cure_chance = 33
 	agent = "Apis Mellifera"

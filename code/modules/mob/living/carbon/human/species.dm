@@ -1001,22 +1001,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	switch(H.nutrition)
 		if(NUTRITION_LEVEL_FULL to INFINITY)
-			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "nutrition", /datum/mood_event/nutrition/fat)
 			H.throw_alert("nutrition", /obj/screen/alert/fat)
-		if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FULL)
-			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "nutrition", /datum/mood_event/nutrition/wellfed)
-			H.clear_alert("nutrition")
-		if( NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "nutrition", /datum/mood_event/nutrition/fed)
-			H.clear_alert("nutrition")
-		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-			SEND_SIGNAL(H, COMSIG_CLEAR_MOOD_EVENT, "nutrition")
+		if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FED)
 			H.clear_alert("nutrition")
 		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "nutrition", /datum/mood_event/nutrition/hungry)
 			H.throw_alert("nutrition", /obj/screen/alert/hungry)
 		if(0 to NUTRITION_LEVEL_STARVING)
-			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "nutrition", /datum/mood_event/nutrition/starving)
 			H.throw_alert("nutrition", /obj/screen/alert/starving)
 
 /datum/species/proc/update_health_hud(mob/living/carbon/human/H)
@@ -1148,7 +1138,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(target.health >= 0 && !(target.has_trait(TRAIT_FAKEDEATH)))
 		target.help_shake_act(user)
 		if(target != user)
-			add_logs(user, target, "shaked")
+			log_combat(user, target, "shaked")
 		return 1
 	else
 		var/we_breathe = !user.has_trait(TRAIT_NOBREATH)
@@ -1221,7 +1211,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(user.limb_destroyer)
 			target.dismembering_strike(user, affecting.body_zone)
 		target.apply_damage(damage, BRUTE, affecting, armor_block)
-		add_logs(user, target, "punched")
+		log_combat(user, target, "punched")
 		if((target.stat != DEAD) && damage >= user.dna.species.punchstunthreshold)
 			target.visible_message("<span class='danger'>[user] has knocked  [target] down!</span>", \
 							"<span class='userdanger'>[user] has knocked [target] down!</span>", null, COMBAT_MESSAGE_RANGE)
@@ -1251,7 +1241,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				"<span class='userdanger'>[user] has pushed [target]!</span>", null, COMBAT_MESSAGE_RANGE)
 			target.apply_effect(40, EFFECT_KNOCKDOWN, target.run_armor_check(affecting, "melee", "Your armor prevents your fall!", "Your armor softens your fall!"))
 			target.forcesay(GLOB.hit_appends)
-			add_logs(user, target, "pushed over")
+			log_combat(user, target, "pushed over")
 			return
 
 		if(randn <= 60)
@@ -1267,14 +1257,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				else
 					I = null
 			playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			add_logs(user, target, "disarmed", "[I ? " removing \the [I]" : ""]")
+			log_combat(user, target, "disarmed", "[I ? " removing \the [I]" : ""]")
 			return
 
 
 		playsound(target, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 		target.visible_message("<span class='danger'>[user] attempted to disarm [target]!</span>", \
 						"<span class='userdanger'>[user] attemped to disarm [target]!</span>", null, COMBAT_MESSAGE_RANGE)
-		add_logs(user, target, "attempted to disarm")
+		log_combat(user, target, "attempted to disarm")
 
 
 /datum/species/proc/spec_hitby(atom/movable/AM, mob/living/carbon/human/H)
@@ -1291,7 +1281,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(M.mind)
 		attacker_style = M.mind.martial_art
 	if((M != H) && M.a_intent != INTENT_HELP && H.check_shields(M, 0, M.name, attack_type = UNARMED_ATTACK))
-		add_logs(M, H, "attempted to touch")
+		log_combat(M, H, "attempted to touch")
 		H.visible_message("<span class='warning'>[M] attempted to touch [H]!</span>")
 		return 0
 	switch(M.a_intent)

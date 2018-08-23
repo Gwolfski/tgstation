@@ -481,3 +481,7 @@
 /datum/map_template/shuttle/elevator/asteroid
 	suffix = "asteroid"
 	name = "Asteroid Outpost Elevator"
+
+/datum/map_template/shuttle/aux_base/micro
+	suffix = "micro"
+	name = "auxilliary base (Microstation)"

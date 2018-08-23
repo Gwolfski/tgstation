@@ -1,3 +1,5 @@
+//shuttles
+
 /obj/machinery/computer/shuttle/microstation/ssshuttle
 	name = "SS Control Console"
 	desc = "A shuttle control console."
@@ -37,6 +39,8 @@
 	dir = WEST
 	port_direction = SOUTH
 
+
+//asteroid stuff
 /obj/machinery/power/apc/ss_asteroid/dorm1
 	areastring = "/area/ss_asteroid/bottom/dorm/one"
 	name = "Dorm 1 APC"
@@ -58,6 +62,8 @@
 	name = "Dorm 4 APC"
 	dir = 1
 	pixel_y = 24
+
+
 
 /obj/structure/closet/secure_closet/tech_secure
 	name = "Secure Tech Storage"

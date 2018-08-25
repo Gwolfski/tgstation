@@ -88,7 +88,7 @@
 		if(ITS_HIP_TO)
 			SSshuttle.centcom_message += "Biohazard cleanup incoming."
 
-	if(MY_GOD_JC)
+		if(MY_GOD_JC)
 			SSshuttle.centcom_message += "Live explosive ordnance incoming. Exercise extreme caution."
 
 /datum/round_event/shuttle_loan/tick()
@@ -202,7 +202,7 @@
 			if(ITS_HIP_TO)
 				var/datum/supply_pack/pack = SSshuttle.supply_packs[/datum/supply_pack/organic/hydroponics/beekeeping_fullkit]
 				pack.generate(pick_n_take(empty_shuttle_turfs))
-				
+
 				shuttle_spawns.Add(/obj/effect/mob_spawn/human/corpse/bee_terrorist)
 				shuttle_spawns.Add(/obj/effect/mob_spawn/human/corpse/cargo_tech)
 				shuttle_spawns.Add(/obj/effect/mob_spawn/human/corpse/cargo_tech)
@@ -215,7 +215,7 @@
 				shuttle_spawns.Add(/obj/structure/beebox/unwrenched)
 				shuttle_spawns.Add(/obj/item/queen_bee/bought)
 				shuttle_spawns.Add(/obj/structure/closet/crate/hydroponics)
-			
+
 				for(var/i in 1 to 8)
 					shuttle_spawns.Add(/mob/living/simple_animal/hostile/poison/bees/toxin)
 
@@ -226,20 +226,10 @@
 				for(var/i in 1 to 10)
 					var/casing = /obj/item/ammo_casing/spent
 					new casing(pick_n_take(empty_shuttle_turfs))
-			
+
 			if(RYU_NOTE)
 				shuttle_spawns.Add(/obj/item/paper/fluff/other/ryu_note)
 				shuttle_spawns.Add(/datum/supply_pack/misc/fruit_basket)
-
-		var/false_positive = 0
-		while(shuttle_spawns.len && empty_shuttle_turfs.len)
-			var/turf/T = pick_n_take(empty_shuttle_turfs)
-			if(T.contents.len && false_positive < 5)
-				false_positive++
-				continue
-
-			var/spawn_type = pick_n_take(shuttle_spawns)
-			new spawn_type(T)
 
 
 			if(MY_GOD_JC)

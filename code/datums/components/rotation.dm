@@ -77,19 +77,19 @@
 	remove_verbs()
 	. = ..()
 
-/datum/component/simple_rotation/proc/ExamineMessage(mob/user)
+/datum/component/simple_rotation/proc/ExamineMessage(datum/source, mob/user)
 	if(rotation_flags & ROTATION_ALTCLICK)
 		to_chat(user, "<span class='notice'>Alt-click to rotate it clockwise.</span>")
 
-/datum/component/simple_rotation/proc/HandRot(mob/user, rotation = default_rotation_direction)
+/datum/component/simple_rotation/proc/HandRot(datum/source, mob/user, rotation = default_rotation_direction)
 	if(!can_be_rotated.Invoke(user, rotation) || !can_user_rotate.Invoke(user, rotation))
 		return
 	BaseRot(user, rotation)
 
-/datum/component/simple_rotation/proc/WrenchRot(obj/item/I, mob/living/user)
+/datum/component/simple_rotation/proc/WrenchRot(datum/source, obj/item/I, mob/living/user)
 	if(!can_be_rotated.Invoke(user,default_rotation_direction) || !can_user_rotate.Invoke(user,default_rotation_direction))
 		return
-	if(istype(I,/obj/item/wrench))
+	if(I.tool_behaviour == TOOL_WRENCH)
 		BaseRot(user,default_rotation_direction)
 		return COMPONENT_NO_AFTERATTACK
 

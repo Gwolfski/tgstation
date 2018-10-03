@@ -7,6 +7,8 @@
 #define ITS_HIP_TO 7
 #define RYU_NOTE 9
 #define MY_GOD_JC 8
+>>>>>>>>> Temporary merge branch 2
+
 
 /datum/round_event_control/shuttle_loan
 	name = "Shuttle Loan"
@@ -61,7 +63,9 @@
 	priority_announce(thanks_msg, "Cargo shuttle commandeered by CentCom.")
 
 	dispatched = 1
-	SSshuttle.points += bonus_points
+	var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_CAR)
+	if(D)
+		D.adjust_money(bonus_points)
 	endWhen = activeFor + 1
 
 	SSshuttle.supply.mode = SHUTTLE_CALL
@@ -87,7 +91,8 @@
 
 		if(ITS_HIP_TO)
 			SSshuttle.centcom_message += "Biohazard cleanup incoming."
-
+<<<<<<<<< Temporary merge branch 1
+=========
 		if(MY_GOD_JC)
 			SSshuttle.centcom_message += "Live explosive ordnance incoming. Exercise extreme caution."
 
@@ -273,6 +278,8 @@
 
 /obj/item/paper/fluff/cargo/bomb/allyourbase
 	info = "Somebody set us up the bomb!"
+
+>>>>>>>>> Temporary merge branch 2
 #undef HIJACK_SYNDIE
 #undef RUSKY_PARTY
 #undef SPIDER_GIFT

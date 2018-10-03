@@ -34,11 +34,13 @@
 	var/lethal_projectile = null	//lethal mode projectile type
 	var/lethal_projectile_sound
 
+	demands_object_input = TRUE		// You can put stuff in once the circuit is in assembly,passed down from additem and handled by attackby()
+
 
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/Destroy()
 	qdel(installed_gun)
-	..()
+	return ..()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attackby(var/obj/O, var/mob/user)
 	if(istype(O, /obj/item/gun/energy))
@@ -185,6 +187,7 @@
 	action_flags = IC_ACTION_COMBAT
 	var/obj/item/grenade/attached_grenade
 	var/pre_attached_grenade_type
+	demands_object_input = TRUE	// You can put stuff in once the circuit is in assembly,passed down from additem and handled by attackby()
 
 /obj/item/integrated_circuit/manipulation/grenade/Initialize()
 	. = ..()
@@ -364,17 +367,20 @@
 	var/max_items = 10
 
 /obj/item/integrated_circuit/manipulation/grabber/do_work()
+	//There shouldn't be any target required to eject all contents
+	var/mode = get_pin_data(IC_INPUT, 2)
+	switch(mode)
+		if(-1)
+			drop_all()
+		if(0)
+			if(contents.len)
+				drop(contents[1])
+
 	var/obj/item/AM = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
 	if(!QDELETED(AM) && !istype(AM, /obj/item/electronic_assembly) && !istype(AM, /obj/item/transfer_valve) && !istype(AM, /obj/item/twohanded) && !istype(assembly.loc, /obj/item/implant/storage))
-		var/mode = get_pin_data(IC_INPUT, 2)
 		switch(mode)
 			if(1)
 				grab(AM)
-			if(0)
-				if(contents.len)
-					drop(contents[1])
-			if(-1)
-				drop_all()
 			if(-2)
 				drop(AM)
 	update_outputs()
@@ -600,7 +606,7 @@
 /obj/item/integrated_circuit/manipulation/matman/Initialize()
 	var/datum/component/material_container/materials = AddComponent(/datum/component/material_container,
 	list(MAT_METAL, MAT_GLASS, MAT_SILVER, MAT_GOLD, MAT_DIAMOND, MAT_PLASMA, MAT_URANIUM, MAT_BANANIUM, MAT_TITANIUM, MAT_BLUESPACE), 0,
-	FALSE, list(/obj/item/stack), CALLBACK(src, .proc/is_insertion_ready), CALLBACK(src, .proc/AfterMaterialInsert))
+	FALSE, /obj/item/stack, CALLBACK(src, .proc/is_insertion_ready), CALLBACK(src, .proc/AfterMaterialInsert))
 	materials.max_amount =100000
 	materials.precise_insertion = TRUE
 	.=..()

@@ -41,6 +41,8 @@
 		reset = new reset_path(get_turf(src))
 
 /obj/item/twohanded/ctf/process()
+	if(is_ctf_target(loc)) //don't reset from someone's hands.
+		return PROCESS_KILL
 	if(world.time > reset_cooldown)
 		forceMove(get_turf(src.reset))
 		for(var/mob/M in GLOB.player_list)
@@ -158,22 +160,11 @@
 
 	var/list/dead_barricades = list()
 
-	var/static/ctf_object_typecache
 	var/static/arena_reset = FALSE
 	var/static/list/people_who_want_to_play = list()
 
 /obj/machinery/capture_the_flag/Initialize()
 	. = ..()
-	if(!ctf_object_typecache)
-		ctf_object_typecache = typecacheof(list(
-			/turf,
-			/mob,
-			/area,
-			/obj/machinery,
-			/obj/structure,
-			/obj/effect/ctf,
-			/obj/item/twohanded/ctf
-		))
 	GLOB.poi_list |= src
 
 /obj/machinery/capture_the_flag/Destroy()
@@ -342,12 +333,20 @@
 
 /obj/machinery/capture_the_flag/proc/reset_the_arena()
 	var/area/A = get_area(src)
+	var/list/ctf_object_typecache = typecacheof(list(
+				/obj/machinery,
+				/obj/effect/ctf,
+				/obj/item/twohanded/ctf
+			))
 	for(var/atm in A)
-		if(!is_type_in_typecache(atm, ctf_object_typecache))
-			qdel(atm)
+		if (isturf(A) || ismob(A) || isarea(A))
+			continue
 		if(isstructure(atm))
 			var/obj/structure/S = atm
 			S.obj_integrity = S.max_integrity
+		else if(!is_type_in_typecache(atm, ctf_object_typecache))
+			qdel(atm)
+
 
 /obj/machinery/capture_the_flag/proc/stop_ctf()
 	ctf_enabled = FALSE

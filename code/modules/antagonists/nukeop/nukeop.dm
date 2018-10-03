@@ -87,7 +87,7 @@
 
 /datum/antagonist/nukeop/proc/forge_objectives()
 	if(nuke_team)
-		owner.objectives |= nuke_team.objectives
+		objectives |= nuke_team.objectives
 
 /datum/antagonist/nukeop/proc/move_to_spawnpoint()
 	var/team_number = 1
@@ -281,9 +281,9 @@
 
 	if(nuke_off_station == NUKE_SYNDICATE_BASE)
 		return NUKE_RESULT_FLUKE
-	else if(!disk_rescued && station_was_nuked && !syndies_didnt_escape)
+	else if(station_was_nuked && !syndies_didnt_escape)
 		return NUKE_RESULT_NUKE_WIN
-	else if (!disk_rescued &&  station_was_nuked && syndies_didnt_escape)
+	else if (station_was_nuked && syndies_didnt_escape)
 		return NUKE_RESULT_NOSURVIVORS
 	else if (!disk_rescued && !station_was_nuked && nuke_off_station && !syndies_didnt_escape)
 		return NUKE_RESULT_WRONG_STATION

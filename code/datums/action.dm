@@ -487,7 +487,10 @@
 		owner.put_in_hands(I)
 		I.attack_self(owner)
 	else
-		to_chat(owner, "<span class='cultitalic'>Your hands are full!</span>")
+		if (owner.get_num_arms() <= 0)
+			to_chat(owner, "<span class='warning'>You dont have any usable hands!</span>")
+		else
+			to_chat(owner, "<span class='warning'>Your hands are full!</span>")
 
 /datum/action/item_action/agent_box
 	name = "Deploy Box"
@@ -502,14 +505,14 @@
 /datum/action/item_action/agent_box/Trigger()
 	if(!..())
 		return FALSE
-	if(!box)
+	if(QDELETED(box))
 		if(cooldown < world.time - 100)
-			box = new(get_turf(owner))
+			box = new(owner.drop_location())
 			owner.forceMove(box)
 			cooldown = world.time
 			owner.playsound_local(box, 'sound/misc/box_deploy.ogg', 50, TRUE)
 	else
-		owner.forceMove(get_turf(box))
+		owner.forceMove(box.drop_location())
 		owner.playsound_local(box, 'sound/misc/box_deploy.ogg', 50, TRUE)
 		QDEL_NULL(box)
 

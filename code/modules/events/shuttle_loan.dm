@@ -7,7 +7,7 @@
 #define ITS_HIP_TO 7
 #define RYU_NOTE 9
 #define MY_GOD_JC 8
->>>>>>>>> Temporary merge branch 2
+
 
 
 /datum/round_event_control/shuttle_loan
@@ -91,8 +91,7 @@
 
 		if(ITS_HIP_TO)
 			SSshuttle.centcom_message += "Biohazard cleanup incoming."
-<<<<<<<<< Temporary merge branch 1
-=========
+
 		if(MY_GOD_JC)
 			SSshuttle.centcom_message += "Live explosive ordnance incoming. Exercise extreme caution."
 
@@ -279,7 +278,7 @@
 /obj/item/paper/fluff/cargo/bomb/allyourbase
 	info = "Somebody set us up the bomb!"
 
->>>>>>>>> Temporary merge branch 2
+
 #undef HIJACK_SYNDIE
 #undef RUSKY_PARTY
 #undef SPIDER_GIFT

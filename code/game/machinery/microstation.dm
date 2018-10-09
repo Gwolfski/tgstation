@@ -39,6 +39,25 @@
 	dir = WEST
 	port_direction = SOUTH
 
+//displays
+
+/obj/machinery/status_display/shuttle/mining
+	name = "mining shuttle status"
+	shuttle_id = "mining"
+
+/*
+/obj/machinery/status_display/shuttle/arrivals
+	name = "arrivals shuttle status"
+	shuttle_id = "arrival
+*/
+
+/obj/machinery/status_display/shuttle/sss
+	name = "SSS status"
+	shuttle_id = "ssshuttle"
+
+/obj/machinery/status_display/shuttle/labor
+	shuttle_id = "laborcamp"
+	name = "labour shuttle status"
 
 //asteroid stuff
 /obj/machinery/power/apc/ss_asteroid/dorm1

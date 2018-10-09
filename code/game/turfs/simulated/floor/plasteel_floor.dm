@@ -40,6 +40,9 @@
 /turf/open/floor/plasteel/dark/corner
 	icon_state = "darkcorner"
 
+/turf/open/floor/plasteel/bar
+    icon_state = "bar"
+
 
 
 /turf/open/floor/plasteel/white

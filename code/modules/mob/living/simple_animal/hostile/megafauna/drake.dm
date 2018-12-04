@@ -60,11 +60,11 @@ Difficulty: Medium
 	medal_type = BOSS_MEDAL_DRAKE
 	score_type = DRAKE_SCORE
 	deathmessage = "collapses into a pile of bones, its flesh sloughing away."
-	death_sound = 'sound/magic/demon_dies.ogg'
+	deathsound = 'sound/magic/demon_dies.ogg'
 	var/datum/action/small_sprite/smallsprite = new/datum/action/small_sprite/drake()
-	
+
 	do_footstep = TRUE
-	
+
 /mob/living/simple_animal/hostile/megafauna/dragon/Initialize()
 	smallsprite.Grant(src)
 	. = ..()
@@ -106,15 +106,15 @@ Difficulty: Medium
 		return
 	anger_modifier = CLAMP(((maxHealth - health)/50),0,20)
 	ranged_cooldown = world.time + ranged_cooldown_time
-	
+
 	if(prob(15 + anger_modifier) && !client)
-		if(health < maxHealth/2)
+		if(health < maxHealth*0.5)
 			swoop_attack()
 		else
 			lava_swoop()
 
 	else if(prob(10+anger_modifier) && !client)
-		if(health < maxHealth/2)
+		if(health < maxHealth*0.5)
 			triple_swoop()
 		else
 			fire_cone()
@@ -128,21 +128,22 @@ Difficulty: Medium
 	while(amount > 0)
 		if(!target)
 			break
-		var/turf/T = pick(RANGE_TURFS(7, target))
+		var/turf/T = pick(RANGE_TURFS(1, target))
 		new /obj/effect/temp_visual/lava_warning(T, 60) // longer reset time for the lava
 		amount--
-		sleep(0.4)
-		
+		sleep(0.8)
+
 /mob/living/simple_animal/hostile/megafauna/dragon/proc/lava_swoop(var/amount = 30)
 	INVOKE_ASYNC(src, .proc/lava_pools, amount)
 	swoop_attack(FALSE, target, 1000) // longer cooldown until it gets reset below
 	fire_cone()
-	sleep(10)
-	fire_cone()
-	sleep(10)
-	fire_cone()
+	if(health < maxHealth*0.5)
+		sleep(10)
+		fire_cone()
+		sleep(10)
+		fire_cone()
 	SetRecoveryTime(40)
-			
+
 /mob/living/simple_animal/hostile/megafauna/dragon/proc/triple_swoop()
 	lava_swoop(15)
 	lava_swoop(15)
@@ -168,14 +169,16 @@ Difficulty: Medium
 			for(var/mob/living/L in T.contents)
 				if(L.client)
 					empty += pick(((RANGE_TURFS(2, L) - RANGE_TURFS(1, L)) & turfs) - empty) // picks a turf within 2 of the creature not outside or in the shield
+			for(var/obj/mecha/M in T.contents)
+				empty += pick(((RANGE_TURFS(2, M) - RANGE_TURFS(1, M)) & turfs) - empty)
 		for(var/turf/T in turfs)
 			if(!(T in empty))
 				new /obj/effect/temp_visual/lava_warning(T)
 			else
 				new /obj/effect/temp_visual/lava_safe(T)
 		amount--
-		sleep(22)
-	
+		sleep(24)
+
 /mob/living/simple_animal/hostile/megafauna/dragon/proc/fire_cone()
 	playsound(get_turf(src),'sound/magic/fireball.ogg', 200, 1)
 	if(QDELETED(src) || stat == DEAD) // we dead no fire
@@ -188,7 +191,7 @@ Difficulty: Medium
 	INVOKE_ASYNC(src, .proc/fire_line, turfs)
 	turfs = line_target(40, range)
 	INVOKE_ASYNC(src, .proc/fire_line, turfs)
-	
+
 /mob/living/simple_animal/hostile/megafauna/dragon/proc/line_target(var/offset, var/range)
 	if(!target)
 		return
@@ -200,7 +203,7 @@ Difficulty: Medium
 			return
 		T = check
 	return (getline(src, T) - get_turf(src))
-	
+
 /mob/living/simple_animal/hostile/megafauna/dragon/proc/fire_line(var/list/turfs)
 	var/list/hit_list = list()
 	for(var/turf/T in turfs)
@@ -212,16 +215,16 @@ Difficulty: Medium
 			if(L in hit_list || L == src)
 				continue
 			hit_list += L
-			L.adjustFireLoss(30)
+			L.adjustFireLoss(20)
 			to_chat(L, "<span class='userdanger'>You're hit by [src]'s fire breath!</span>")
-			
+
 		// deals damage to mechs
 		for(var/obj/mecha/M in T.contents)
 			if(M in hit_list)
 				continue
 			hit_list += M
 			M.take_damage(45, BRUTE, "melee", 1)
-		sleep(1.25)
+		sleep(1.5)
 
 /mob/living/simple_animal/hostile/megafauna/dragon/proc/swoop_attack(lava_arena = TRUE, atom/movable/manual_target, var/swoop_cooldown = 15)
 	if(stat || swooping)
@@ -263,16 +266,16 @@ Difficulty: Medium
 	swooping |= SWOOP_INVULNERABLE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	sleep(7)
-	
+
 	while(target && loc != get_turf(target))
 		forceMove(get_step(src, get_dir(src, target)))
 		sleep(0.5)
-	
+
 	// Ash drake flies onto its target and rains fire down upon them
-	var/descentTime = 7;
+	var/descentTime = 10;
 	if(lava_arena)
 		lava_arena()
-	
+
 	//ensure swoop direction continuity.
 	if(negative)
 		if(ISINRANGE(x, initial_x + 1, initial_x + DRAKE_SWOOP_DIRECTION_CHANGE_RANGE))
@@ -301,6 +304,8 @@ Difficulty: Medium
 				var/throwtarget = get_edge_target_turf(src, throw_dir)
 				L.throw_at(throwtarget, 3)
 				visible_message("<span class='warning'>[L] is thrown clear of [src]!</span>")
+	for(var/obj/mecha/M in orange(1, src))
+		M.take_damage(75, BRUTE, "melee", 1)
 
 	for(var/mob/M in range(7, src))
 		shake_camera(M, 15, 1)
@@ -317,6 +322,7 @@ Difficulty: Medium
 		to_chat(src, "<span class='warning'>You need to wait 20 seconds between swoop attacks!</span>")
 		return
 	swoop_attack(FALSE, A, 30)
+	lava_pools(10)
 	player_cooldown = world.time + 200 // needs seperate cooldown or cant use fire attacks
 
 /obj/item/gps/internal/dragon
@@ -329,7 +335,7 @@ Difficulty: Medium
 	icon_state = "lavastaff_warn"
 	layer = BELOW_MOB_LAYER
 	light_range = 2
-	duration = 11
+	duration = 13
 
 /obj/effect/temp_visual/lava_warning/ex_act()
 	return
@@ -339,23 +345,23 @@ Difficulty: Medium
 	INVOKE_ASYNC(src, .proc/fall, reset_time)
 	src.alpha = 63.75
 	animate(src, alpha = 255, time = duration)
-	
+
 /obj/effect/temp_visual/lava_warning/proc/fall(var/reset_time)
 	var/turf/T = get_turf(src)
 	playsound(T,'sound/magic/fleshtostone.ogg', 80, 1)
 	sleep(duration)
 	playsound(T,'sound/magic/fireball.ogg', 200, 1)
-	
+
 	for(var/mob/living/L in T.contents)
 		if(istype(L, /mob/living/simple_animal/hostile/megafauna/dragon))
 			continue
 		L.adjustFireLoss(10)
 		to_chat(L, "<span class='userdanger'>You fall directly into the pool of lava!</span>")
-		
+
 	// deals damage to mechs
 	for(var/obj/mecha/M in T.contents)
 		M.take_damage(45, BRUTE, "melee", 1)
-		
+
 	// changes turf to lava temporarily
 	if(!istype(T, /turf/closed) && !istype(T, /turf/open/lava))
 		var/lava_turf = /turf/open/lava/smooth
@@ -363,7 +369,7 @@ Difficulty: Medium
 		T.ChangeTurf(lava_turf)
 		sleep(reset_time)
 		T.ChangeTurf(reset_turf)
-		
+
 /obj/effect/temp_visual/drakewall
 	desc = "An ash drakes true flame."
 	name = "Fire Barrier"
@@ -373,15 +379,15 @@ Difficulty: Medium
 	opacity = 0
 	density = TRUE
 	CanAtmosPass = ATMOS_PASS_DENSITY
-	duration = 76
+	duration = 82
 	color = COLOR_DARK_ORANGE
-	
+
 /obj/effect/temp_visual/lava_safe
 	icon = 'icons/obj/hand_of_god_structures.dmi'
 	icon_state = "trap-earth"
 	layer = BELOW_MOB_LAYER
 	light_range = 2
-	duration = 11
+	duration = 13
 
 /obj/effect/temp_visual/dragon_swoop
 	name = "certain death"
@@ -399,7 +405,7 @@ Difficulty: Medium
 	icon_state = "dragon"
 	layer = ABOVE_ALL_MOB_LAYER
 	pixel_x = -16
-	duration = 7
+	duration = 10
 	randomdir = FALSE
 
 /obj/effect/temp_visual/dragon_flight/Initialize(mapload, negative)

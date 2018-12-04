@@ -1,14 +1,17 @@
 /mob/CanPass(atom/movable/mover, turf/target)
+	return TRUE				//There's almost no cases where non /living mobs should be used in game as actual mobs, other than ghosts.
+
+/mob/living/CanPass(atom/movable/mover, turf/target)
 	if((mover.pass_flags & PASSMOB))
 		return TRUE
 	if(istype(mover, /obj/item/projectile) || mover.throwing)
-		return (!density || lying)
+		return (!density || !(mobility_flags & MOBILITY_STAND))
 	if(buckled == mover)
 		return TRUE
 	if(ismob(mover))
 		if (mover in buckled_mobs)
 			return TRUE
-	return (!mover.density || !density || lying)
+	return (!mover.density || !density || !(mobility_flags & MOBILITY_STAND))
 
 //DO NOT USE THIS UNLESS YOU ABSOLUTELY HAVE TO. THIS IS BEING PHASED OUT FOR THE MOVESPEED MODIFICATION SYSTEM.
 //See mob_movespeed.dm
@@ -75,7 +78,7 @@
 	if(mob.buckled)							//if we're buckled to something, tell it we moved.
 		return mob.buckled.relaymove(mob, direct)
 
-	if(!mob.canmove)
+	if(!(L.mobility_flags & MOBILITY_MOVE))
 		return FALSE
 
 	if(isobj(mob.loc) || ismob(mob.loc))	//Inside an object, tell it we moved
@@ -190,7 +193,7 @@
 		if(INCORPOREAL_MOVE_JAUNT) //Incorporeal move, but blocked by holy-watered tiles and salt piles.
 			var/turf/open/floor/stepTurf = get_step(L, direct)
 			if(stepTurf)
-				for(var/obj/effect/decal/cleanable/salt/S in stepTurf)
+				for(var/obj/effect/decal/cleanable/food/salt/S in stepTurf)
 					to_chat(L, "<span class='warning'>[S] bars your passage!</span>")
 					if(isrevenant(L))
 						var/mob/living/simple_animal/revenant/R = L
@@ -257,7 +260,7 @@
 	return FALSE
 
 
-/mob/proc/slip(s_amount, w_amount, obj/O, lube)
+/mob/proc/slip(knockdown, paralyze, forcedrop, w_amount, obj/O, lube)
 	return
 
 /mob/proc/update_gravity()

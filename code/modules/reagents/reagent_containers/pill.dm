@@ -47,10 +47,9 @@
 							"<span class='userdanger'>[user] forces [M] to [apply_method] [src].</span>")
 
 
-	add_logs(user, M, "fed", reagents.log_list())
 	if(reagents.total_volume)
 		reagents.reaction(M, apply_type)
-		reagents.trans_to(M, reagents.total_volume)
+		reagents.trans_to(M, reagents.total_volume, transfered_by = user)
 	qdel(src)
 	return 1
 
@@ -72,7 +71,7 @@
 	to_chat(user, "<span class='notice'>You dissolve [src] in [target].</span>")
 	for(var/mob/O in viewers(2, user))	//viewers is necessary here because of the small radius
 		to_chat(O, "<span class='warning'>[user] slips something into [target]!</span>")
-	reagents.trans_to(target, reagents.total_volume)
+	reagents.trans_to(target, reagents.total_volume, transfered_by = user)
 	qdel(src)
 
 /obj/item/reagent_containers/pill/tox
@@ -154,7 +153,14 @@
 	icon_state = "pill18"
 	list_reagents = list("insulin" = 50)
 	roundstart = 1
-///////////////////////////////////////// this pill is used only in a legion mob drop 
+
+/obj/item/reagent_containers/pill/psicodine
+	name = "psicodine pill"
+	desc = "Used to treat mental instability and traumas."
+	list_reagents = list("psicodine" = 10)
+	icon_state = "pill22"
+	roundstart = 1
+///////////////////////////////////////// this pill is used only in a legion mob drop
 /obj/item/reagent_containers/pill/shadowtoxin
 	name = "black pill"
 	desc = "I wouldn't eat this if I were you."
@@ -181,5 +187,25 @@
 	name = "speedy pill"
 	list_reagents = list("aranesp" = 10)
 
+/obj/item/reagent_containers/pill/happiness
+	name = "happiness pill"
+	desc = "It has a creepy smiling face on it."
+	icon_state = "pill_happy"
+	list_reagents = list("happiness" = 10)
 
+
+/obj/item/reagent_containers/pill/floorpill
+	name = "floorpill"
+	desc = "A strange pill found in the depths of maintenance"
+	icon_state = "pill21"
+	var/static/list/names = list("maintenance pill","floorpill","mystery pill","suspicious pill","strange pill")
+	var/static/list/descs = list("Your feeling is telling you no, but...","Drugs are expensive, you can't afford not to eat any pills that you find."\
+	, "Surely, there's no way this could go bad.")
+
+/obj/item/reagent_containers/pill/floorpill/Initialize()
+	list_reagents = list(get_random_reagent_id() = rand(10,50))
+	. = ..()
+	name = pick(names)
+	if(prob(20))
+		desc = pick(descs)
 

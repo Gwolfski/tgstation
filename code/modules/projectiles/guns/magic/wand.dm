@@ -50,7 +50,7 @@
 /obj/item/gun/magic/wand/proc/zap_self(mob/living/user)
 	user.visible_message("<span class='danger'>[user] zaps [user.p_them()]self with [src].</span>")
 	playsound(user, fire_sound, 50, 1)
-	user.log_message("zapped [user.p_them()]self with a <b>[src]</b>", INDIVIDUAL_ATTACK_LOG)
+	user.log_message("zapped [user.p_them()]self with a <b>[src]</b>", LOG_ATTACK)
 
 
 /////////////////////////////////////
@@ -131,7 +131,7 @@
 	no_den_usage = 1
 
 /obj/item/gun/magic/wand/teleport/zap_self(mob/living/user)
-	if(do_teleport(user, user, 10))
+	if(do_teleport(user, user, 10, channel = TELEPORT_CHANNEL_MAGIC))
 		var/datum/effect_system/smoke_spread/smoke = new
 		smoke.set_up(3, user.loc)
 		smoke.start()

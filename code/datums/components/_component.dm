@@ -1,8 +1,6 @@
 /datum/component
-	var/enabled = FALSE
 	var/dupe_mode = COMPONENT_DUPE_HIGHLANDER
 	var/dupe_type
-	var/list/signal_procs
 	var/datum/parent
 
 /datum/component/New(datum/P, ...)
@@ -10,7 +8,7 @@
 	var/list/arguments = args.Copy(2)
 	if(Initialize(arglist(arguments)) == COMPONENT_INCOMPATIBLE)
 		qdel(src, TRUE, TRUE)
-		CRASH("Incompatible [type] assigned to a [P.type]!")
+		CRASH("Incompatible [type] assigned to a [P.type]! args: [json_encode(arguments)]")
 
 	_JoinParent(P)
 
@@ -47,19 +45,21 @@
 		else	//only component of this type, no list
 			dc[I] = src
 
+	RegisterWithParent()
+
+// If you want/expect to be moving the component around between parents, use this to register on the parent for signals
+/datum/component/proc/RegisterWithParent()
+	return
+
 /datum/component/proc/Initialize(...)
 	return
 
 /datum/component/Destroy(force=FALSE, silent=FALSE)
-	enabled = FALSE
-	var/datum/P = parent
-	if(!force)
+	if(!force && parent)
 		_RemoveFromParent()
 	if(!silent)
-		SEND_SIGNAL(P, COMSIG_COMPONENT_REMOVING, src)
+		SEND_SIGNAL(parent, COMSIG_COMPONENT_REMOVING, src)
 	parent = null
-	for(var/target in signal_procs)
-		UnregisterSignal(target, signal_procs[target])
 	return ..()
 
 /datum/component/proc/_RemoveFromParent()
@@ -78,10 +78,15 @@
 	if(!dc.len)
 		P.datum_components = null
 
-/datum/component/proc/RegisterSignal(datum/target, sig_type_or_types, proc_or_callback, override = FALSE)
+	UnregisterFromParent()
+
+/datum/component/proc/UnregisterFromParent()
+	return
+
+/datum/proc/RegisterSignal(datum/target, sig_type_or_types, proc_or_callback, override = FALSE)
 	if(QDELETED(src) || QDELETED(target))
 		return
-	
+
 	var/list/procs = signal_procs
 	if(!procs)
 		signal_procs = procs = list()
@@ -111,9 +116,9 @@
 		else // Many other things have registered here
 			lookup[sig_type][src] = TRUE
 
-	enabled = TRUE
+	signal_enabled = TRUE
 
-/datum/component/proc/UnregisterSignal(datum/target, sig_type_or_types)
+/datum/proc/UnregisterSignal(datum/target, sig_type_or_types)
 	var/list/lookup = target.comp_lookup
 	if(!signal_procs || !signal_procs[target] || !lookup)
 		return
@@ -163,15 +168,15 @@
 /datum/proc/_SendSignal(sigtype, list/arguments)
 	var/target = comp_lookup[sigtype]
 	if(!length(target))
-		var/datum/component/C = target
-		if(!C.enabled)
+		var/datum/C = target
+		if(!C.signal_enabled)
 			return NONE
 		var/datum/callback/CB = C.signal_procs[src][sigtype]
 		return CB.InvokeAsync(arglist(arguments))
 	. = NONE
 	for(var/I in target)
-		var/datum/component/C = I
-		if(!C.enabled)
+		var/datum/C = I
+		if(!C.signal_enabled)
 			continue
 		var/datum/callback/CB = C.signal_procs[src][sigtype]
 		. |= CB.InvokeAsync(arglist(arguments))
@@ -215,12 +220,9 @@
 	if(ispath(nt))
 		if(nt == /datum/component)
 			CRASH("[nt] attempted instantiation!")
-		if(!isnum(dm))
-			CRASH("[nt]: Invalid dupe_mode ([dm])!")
-		if(dt && !ispath(dt))
-			CRASH("[nt]: Invalid dupe_type ([dt])!")
 	else
 		new_comp = nt
+		nt = new_comp.type
 
 	args[1] = src
 
@@ -270,10 +272,11 @@
 	var/datum/old_parent = parent
 	PreTransfer()
 	_RemoveFromParent()
+	parent = null
 	SEND_SIGNAL(old_parent, COMSIG_COMPONENT_REMOVING, src)
 
 /datum/proc/TakeComponent(datum/component/target)
-	if(!target)
+	if(!target || target.parent == src)
 		return
 	if(target.parent)
 		target.RemoveComponent()

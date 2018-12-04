@@ -15,8 +15,7 @@
 
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sanitizeSQL(t)
-	var/sqltext = SSdbcore.Quote("[t]");
-	return copytext(sqltext, 2, lentext(sqltext));//Quote() adds quotes around input, we already do that
+	return SSdbcore.Quote("[t]")
 
 /proc/format_table_name(table as text)
 	return CONFIG_GET(string/feedback_tableprefix) + table
@@ -766,3 +765,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 			return "twelfth"
 		else
 			return "[number]\th"
+
+
+/proc/random_capital_letter()
+	return uppertext(pick(GLOB.alphabet))

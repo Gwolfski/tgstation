@@ -112,7 +112,7 @@
 		limbs_to_dismember = arms + legs
 		if(holding_bodypart)
 			limbs_to_dismember += holding_bodypart
-		
+
 		var/speedbase = abs((4 SECONDS) / limbs_to_dismember.len)
 		for(bodypart in limbs_to_dismember)
 			i++
@@ -154,7 +154,7 @@
 	add_fingerprint(user)
 	if((user.has_trait(TRAIT_CLUMSY)) && prob(50))
 		to_chat(user, "<span class ='danger'>You club yourself over the head.</span>")
-		user.Knockdown(60 * force)
+		user.Paralyze(60 * force)
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			H.apply_damage(2*force, BRUTE, BODY_ZONE_HEAD)
@@ -180,8 +180,8 @@
 				if(check_martial_counter(H, user))
 					return
 			playsound(get_turf(src), 'sound/effects/woodhit.ogg', 75, 1, -1)
-			target.Knockdown(60)
-			add_logs(user, target, "stunned", src)
+			target.Paralyze(60)
+			log_combat(user, target, "stunned", src)
 			src.add_fingerprint(user)
 			target.visible_message("<span class ='danger'>[user] has knocked down [target] with [src]!</span>", \
 				"<span class ='userdanger'>[user] has knocked down [target] with [src]!</span>")
@@ -213,14 +213,14 @@
 	if(!on)
 		src.attack_self(user)
 	else
-		playsound(loc, 'sound/weapons/batonextend.ogg', 50, 1)
+		playsound(src, 'sound/weapons/batonextend.ogg', 50, 1)
 		add_fingerprint(user)
 	sleep(3)
-	if (H && !QDELETED(H))
-		if (B && !QDELETED(B))
+	if (!QDELETED(H))
+		if(!QDELETED(B))
 			H.internal_organs -= B
 			qdel(B)
-		new /obj/effect/gibspawner/generic(get_turf(H), H.dna)
+		new /obj/effect/gibspawner/generic(H.drop_location(), H)
 		return (BRUTELOSS)
 
 /obj/item/melee/classic_baton/telescopic/attack_self(mob/user)
@@ -287,13 +287,13 @@
 	if(proximity_flag)
 		consume_everything(target)
 
-/obj/item/melee/supermatter_sword/throw_impact(target)
+/obj/item/melee/supermatter_sword/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	..()
-	if(ismob(target))
-		var/mob/M
+	if(ismob(hit_atom))
+		var/mob/M = hit_atom
 		if(src.loc == M)
 			M.dropItemToGround(src)
-	consume_everything(target)
+	consume_everything(hit_atom)
 
 /obj/item/melee/supermatter_sword/pickup(user)
 	..()
@@ -317,13 +317,13 @@
 /obj/item/melee/supermatter_sword/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] touches [src]'s blade. It looks like [user.p_theyre()] tired of waiting for the radiation to kill [user.p_them()]!</span>")
 	user.dropItemToGround(src, TRUE)
-	shard.CollidedWith(user)
+	shard.Bumped(user)
 
 /obj/item/melee/supermatter_sword/proc/consume_everything(target)
 	if(isnull(target))
 		shard.Consume()
 	else if(!isturf(target))
-		shard.CollidedWith(target)
+		shard.Bumped(target)
 	else
 		consume_turf(target)
 
@@ -352,7 +352,7 @@
 	force = 15
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")
-	hitsound = 'sound/weapons/chainhit.ogg'
+	hitsound = 'sound/weapons/whip.ogg'
 
 /obj/item/melee/curator_whip/afterattack(target, mob/user, proximity_flag)
 	. = ..()

@@ -50,7 +50,9 @@ Difficulty: Hard
 	medal_type = BOSS_MEDAL_BUBBLEGUM
 	score_type = BUBBLEGUM_SCORE
 	deathmessage = "sinks into a pool of blood, fleeing the battle. You've won, for now... "
-	death_sound = 'sound/magic/enter_blood.ogg'
+	deathsound = 'sound/magic/enter_blood.ogg'
+
+	do_footstep = TRUE
 
 /obj/item/gps/internal/bubblegum
 	icon_state = null
@@ -89,8 +91,8 @@ Difficulty: Hard
 			return INITIALIZE_HINT_QDEL //There can be only one
 	var/obj/effect/proc_holder/spell/bloodcrawl/bloodspell = new
 	AddSpell(bloodspell)
-	if(istype(loc, /obj/effect/dummy/slaughter))
-		bloodspell.phased = 1
+	if(istype(loc, /obj/effect/dummy/phased_mob/slaughter))
+		bloodspell.phased = TRUE
 	internal = new/obj/item/gps/internal/bubblegum(src)
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/grant_achievement(medaltype,scoretype)
@@ -147,19 +149,19 @@ Difficulty: Hard
 	Goto(target, move_to_delay, minimum_distance)
 
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/Collide(atom/A)
+/mob/living/simple_animal/hostile/megafauna/bubblegum/Bump(atom/A)
 	if(charging)
 		if(isturf(A) || isobj(A) && A.density)
 			A.ex_act(EXPLODE_HEAVY)
 		DestroySurroundings()
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/throw_impact(atom/A)
+/mob/living/simple_animal/hostile/megafauna/bubblegum/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(!charging)
 		return ..()
 
-	else if(isliving(A))
-		var/mob/living/L = A
+	else if(isliving(hit_atom))
+		var/mob/living/L = hit_atom
 		L.visible_message("<span class='danger'>[src] slams into [L]!</span>", "<span class='userdanger'>[src] slams into you!</span>")
 		L.apply_damage(40, BRUTE)
 		playsound(get_turf(L), 'sound/effects/meteorimpact.ogg', 100, 1)

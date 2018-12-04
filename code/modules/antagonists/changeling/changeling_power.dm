@@ -36,11 +36,11 @@
 		return
 	var/datum/antagonist/changeling/c = user.mind.has_antag_datum(/datum/antagonist/changeling)
 	if(sting_action(user, target))
-		SSblackbox.record_feedback("nested tally", "changeling_powers", 1, list("[name]"))
 		sting_feedback(user, target)
 		c.chem_charges -= chemical_cost
 
 /obj/effect/proc_holder/changeling/proc/sting_action(mob/user, mob/target)
+	SSblackbox.record_feedback("nested tally", "changeling_powers", 1, list("[name]"))
 	return 0
 
 /obj/effect/proc_holder/changeling/proc/sting_feedback(mob/user, mob/target)
@@ -65,7 +65,7 @@
 	if(req_stat < user.stat)
 		to_chat(user, "<span class='warning'>We are incapacitated.</span>")
 		return 0
-	if((user.has_trait(TRAIT_FAKEDEATH)) && (!ignores_fakedeath))
+	if((user.has_trait(TRAIT_DEATHCOMA)) && (!ignores_fakedeath))
 		to_chat(user, "<span class='warning'>We are incapacitated.</span>")
 		return 0
 	return 1

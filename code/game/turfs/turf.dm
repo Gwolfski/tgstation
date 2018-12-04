@@ -9,7 +9,7 @@
 	// A list will be created in initialization that figures out the baseturf's baseturf etc.
 	// In the case of a list it is sorted from bottom layer to top.
 	// This shouldn't be modified directly, use the helper procs.
-	var/list/baseturfs = /turf/open/space
+	var/list/baseturfs = /turf/baseturf_bottom
 
 	var/temperature = T20C
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
@@ -30,6 +30,8 @@
 	var/bullet_bounce_sound = 'sound/weapons/bulletremove.ogg' //sound played when a shell casing is ejected ontop of the turf.
 	var/bullet_sizzle = FALSE //used by ammo_casing/bounce_away() to determine if the shell casing should make a sizzle sound when it's ejected over the turf
 							//IE if the turf is supposed to be water, set TRUE.
+
+	var/tiled_dirt = FALSE // use smooth tiled dirt decal
 
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")
@@ -139,40 +141,40 @@
 	stack_trace("Non movable passed to turf CanPass : [mover]")
 	return FALSE
 
-/turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
-	// First, make sure it can leave its square
-	if(isturf(mover.loc))
-		// Nothing but border objects stop you from leaving a tile, only one loop is needed
-		for(var/obj/obstacle in mover.loc)
-			if(!obstacle.CheckExit(mover, src) && obstacle != mover && obstacle != forget)
-				mover.Collide(obstacle)
-				return FALSE
-
-	//Then, check the turf itself
-	if (!src.CanPass(mover, src))
-		mover.Collide(src)
+/turf/Enter(atom/movable/mover, atom/oldloc)
+	// Do not call ..()
+	// Byond's default turf/Enter() doesn't have the behaviour we want with Bump()
+	// By default byond will call Bump() on the first dense object in contents
+	// Here's hoping it doesn't stay like this for years before we finish conversion to step_
+	var/atom/firstbump
+	if(!CanPass(mover, src))
+		firstbump = src
+	else
+		for(var/i in contents)
+			if(i == mover || i == mover.loc) // Multi tile objects and moving out of other objects
+				continue
+			var/atom/movable/thing = i
+			if(thing.Cross(mover))
+				continue
+			if(!firstbump || ((thing.layer > firstbump.layer || thing.flags_1 & ON_BORDER_1) && !(firstbump.flags_1 & ON_BORDER_1)))
+				firstbump = thing
+	if(firstbump)
+		mover.Bump(firstbump)
 		return FALSE
+	return TRUE
 
-
-	var/atom/movable/topmost_bump
-	var/top_layer = FALSE
-
-	//Next, check objects to block entry that are on the border
-	for(var/atom/movable/obstacle in src)
-		if(!obstacle.CanPass(mover, mover.loc, 1) && (forget != obstacle))
-			if(obstacle.flags_1 & ON_BORDER_1)
-				mover.Collide(obstacle)
-				return FALSE
-			else
-				if(obstacle.layer > top_layer)
-					topmost_bump = obstacle
-					top_layer = obstacle.layer
-
-	if(topmost_bump)
-		mover.Collide(topmost_bump)
+/turf/Exit(atom/movable/mover, atom/newloc)
+	. = ..()
+	if(!.)
 		return FALSE
-
-	return TRUE //Nothing found to block so return success!
+	for(var/i in contents)
+		if(i == mover)
+			continue
+		var/atom/movable/thing = i
+		if(!thing.Uncross(mover, newloc))
+			if(thing.flags_1 & ON_BORDER_1)
+				mover.Bump(thing)
+			return FALSE
 
 /turf/Entered(atom/movable/AM)
 	..()
@@ -424,7 +426,9 @@
 	return
 
 /turf/handle_fall(mob/faller, forced)
-	faller.lying = pick(90, 270)
+	if(isliving(faller))
+		var/mob/living/L = faller
+		L.lying = pick(90, 270)
 	if(!forced)
 		return
 	if(has_gravity(src))
@@ -460,7 +464,7 @@
 		clear_reagents_to_vomit_pool(M,V)
 
 /proc/clear_reagents_to_vomit_pool(mob/living/carbon/M, obj/effect/decal/cleanable/vomit/V)
-	M.reagents.trans_to(V, M.reagents.total_volume / 10)
+	M.reagents.trans_to(V, M.reagents.total_volume / 10, transfered_by = M)
 	for(var/datum/reagent/R in M.reagents.reagent_list)                //clears the stomach of anything that might be digested as food
 		if(istype(R, /datum/reagent/consumable))
 			var/datum/reagent/consumable/nutri_check = R

@@ -8,6 +8,7 @@
 
 //Revive from revival stasis
 /obj/effect/proc_holder/changeling/revive/sting_action(mob/living/carbon/user)
+	..()
 	user.cure_fakedeath("changeling")
 	user.revive(full_heal = 1)
 	var/list/missing = user.get_missing_limbs()
@@ -33,8 +34,7 @@
 	if(!.)
 		return
 
-	if(user.has_trait(CHANGELING_DRAIN) || ((user.stat != DEAD) && !(user.has_trait(TRAIT_FAKEDEATH))))
+	if(user.has_trait(CHANGELING_DRAIN) || ((user.stat != DEAD) && !(user.has_trait(TRAIT_DEATHCOMA))))
 		var/datum/antagonist/changeling/changeling = user.mind.has_antag_datum(/datum/antagonist/changeling)
 		changeling.purchasedpowers -= src
 		return FALSE
-
